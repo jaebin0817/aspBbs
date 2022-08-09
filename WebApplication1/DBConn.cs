@@ -5,48 +5,63 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data;
 using System.Web.Configuration;
+using System.Configuration;
+using System.Web.Security;
+using System.Net;
+using System.Net.Sockets;
 
-namespace Bbs
-{
-    public class DBConn
+
+public class DBConn
     {
-        string connectionString = WebConfigurationManager.ConnectionStrings["ASPNET"].ConnectionString;
-        public SqlConnection dbConn;
 
-        public DBConn()
+        public string GetConnectionString(string name = "BoardDB")
         {
-            dbConn = new SqlConnection(connectionString);
-            dbConn.Open();
+            if (ConfigurationManager.ConnectionStrings[name] == null) return string.Empty;
+            else return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
-        public void Close()
+
+        public DataTable GetData(string selectString)
         {
-            dbConn.Close();
+            string strConn = GetConnectionString();
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(strConn))
+            {
+                conn.Open();
+
+                SqlDataAdapter adapter = new SqlDataAdapter(selectString, conn);
+
+                try { adapter.Fill(dt); }
+                catch { dt = null; }
+           
+            }
+            return dt;
         }
 
-        public SqlConnection GetConnection()
+        public DataRow GetRow(string selectString)
         {
-            return dbConn;
-        }
-
-        public void ExecuteNonQuery(string queryString)
-        {
-            SqlCommand cmd = new SqlCommand(queryString, dbConn);
-            cmd.ExecuteNonQuery();
-        }
-
-        public SqlDataReader ExecuteReader(string queryString)
-        {
-            SqlCommand cmd = new SqlCommand(queryString, dbConn);
-            return cmd.ExecuteReader();
-        }
-
-        public object ExecuteScalar(string queryString)
-        {
-            SqlCommand cmd = new SqlCommand(queryString, dbConn);
-            return cmd.ExecuteScalar();
+            DataRow row = null;
+            DataTable dt = GetData(selectString);
+                    
+            if (dt != null) { row = dt.Rows[0]; }            
+            return row;
 
         }
 
-    }
+
+        public string GetIP()
+        {
+            string localIP = string.Empty;
+            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
+            {
+                socket.Connect("8.8.8.8", 65530);
+                IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
+                localIP = endPoint.Address.ToString();
+            }
+            return localIP;
+
+        }
+
+
 }

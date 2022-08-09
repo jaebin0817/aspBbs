@@ -13,23 +13,60 @@
             </div>
             <div class="post-cont"><asp:Label runat="server" ID="lblP_content"></asp:Label></div>
             <div class="post-mng">
-                <a href="#">수정</a>
+                <asp:Label runat="server" ID="lblMod"></asp:Label>
                 ·
-                <a href="#">삭제</a>
+                <asp:Label runat="server" ID="lblDel"></asp:Label>
+                
                 ·
                 <a href="BbsWrite.aspx">글쓰기</a>
             </div>
         </div>
         <div class="reply-wrap">
-            댓글영역
+            <div class="reply-list-wrap">
+                <table>
+                <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">
+                </asp:SqlDataSource>
+                <asp:Repeater runat="server" ID="rptProduct">
+                    <ItemTemplate>
+                        
+                            <tr>
+                                <td><strong><%# Eval("r_wname") %></strong>&nbsp;&nbsp;</td>
+                                <td id="r_redgt_td"><%# Eval("r_regdt") %>&nbsp;&nbsp;</td>
+                                <td><a href="BbsPwcheck.aspx?mode=r_mod&r_no=<%# Eval("r_no") %>">수정</a>&nbsp;&nbsp;</td>
+                                <td><a href="BbsPwcheck.aspx?mode=r_del&r_no=<%# Eval("r_no") %>">삭제</a>&nbsp;&nbsp;</td>
+                                <td><a href="BbsReply.aspx?mode=r_re&r_no=<%# Eval("r_no") %>">답글</a>&nbsp;&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="r_content_td" colspan="5"><%# Eval("r_content") %></td>
+                            </tr>
+                        
+                    </ItemTemplate>
+                </asp:Repeater> 
+                </table>
+            </div>
+            <div class="reply-write-wrap">
+                <div class="reply-writer">
+                    <asp:TextBox ID="r_wname" runat="server" placeholder="작성자" CssClass="form-control"></asp:TextBox>
+                </div>                
+                <div class="reply-pw">
+                    <asp:TextBox ID="r_pw" runat="server" TextMode="Password" placeholder="비밀번호"  CssClass="form-control"></asp:TextBox>
+                </div>
+                <div class="reply-cont">
+                    <asp:TextBox ID="r_content" runat="server" TextMode="MultiLine" CssClass="form-control" Rows="3" Columns="300"></asp:TextBox>
+                </div>
+                <div class="reply-btn">
+                    <asp:Button ID="btnReply" runat="server" Text="댓글 작성" OnClick="BtnReply_Click" CssClass="btnReply"/>
+                </div>
+            </div>
+
         </div>
         <div class="btn-wrap">
           
-            <button>◁</button>
-            <button>목록</button>
-            <button>▷</button>        
-          
+            <asp:Button id="btnLeft" runat="server" Text="◁" CausesValidation="false" CssClass="btn-lists" OnClick="BtnLeft_Click" />
+            <asp:Button id="btnList" runat="server" Text="목록" CausesValidation="false" CssClass="btn-lists" />
+            <asp:Button id="btnRight" runat="server" Text="▷" CausesValidation="false" CssClass="btn-lists" OnClick="BtnRight_Click" />
+                      
         </div>
-    </div>
+    </div>`
 
 </asp:Content>

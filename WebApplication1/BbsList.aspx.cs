@@ -13,7 +13,15 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            dsrcProduct.SelectCommand = "SELECT * FROM bbs_post WHERE c_no="+ Request["c_no"] +" ORDER BY p_no DESC";
+            if (Request["keyword"] == null)
+            {
+                dsrcProduct.SelectCommand = "SELECT * FROM bbs_post WHERE c_no=" + Request["c_no"] + " ORDER BY p_no DESC";
+            }
+            else
+            {
+                string keyword = Request["keyword"];
+                dsrcProduct.SelectCommand = "SELECT * FROM bbs_post WHERE p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%' ORDER BY p_no DESC";
+            }
 
 
             rptProduct.DataSource = dsrcProduct;

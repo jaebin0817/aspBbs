@@ -15,6 +15,8 @@ namespace WebApplication1
 {
     public partial class BbsWrite : System.Web.UI.Page
     {
+        DBConn dbConn = new DBConn();
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -22,7 +24,7 @@ namespace WebApplication1
 
         protected void BtnWrite_Click(object sender, EventArgs e)
         {
-            string strConn = GetConnectionString();
+            string strConn = dbConn.GetConnectionString();
 
             using (SqlConnection conn = new SqlConnection(strConn))
             {
@@ -36,15 +38,20 @@ namespace WebApplication1
                 cmd.Parameters.AddWithValue("@p_subject", p_subject.Text);
                 cmd.Parameters.AddWithValue("@p_content", p_content.Text);
                 cmd.Parameters.AddWithValue("@p_wname", p_wname.Text);
-                cmd.Parameters.AddWithValue("@p_wip", GetIP());
+                cmd.Parameters.AddWithValue("@p_wip", dbConn.GetIP());
                 cmd.Parameters.AddWithValue("@p_pw", p_pw.Text);
 
                 if (p_thumb.HasFile)
                 {
-                    string fileName = Server.MapPath("~/Uploads") + @"\" + p_thumb.FileName;
-                    p_thumb.SaveAs(fileName);
+                    string savePath = Server.MapPath("~/Uploads") + @"\";
+                    string fileName = p_thumb.FileName;
 
-                    cmd.Parameters.AddWithValue("@p_thumb", p_thumb.FileName);
+                    FileUpload fu = new FileUpload();
+                    fileName = fu.FileNameCheck(fileName, savePath);
+
+                    p_thumb.SaveAs(savePath+fileName);
+
+                    cmd.Parameters.AddWithValue("@p_thumb", fileName);
 
                 }
                 else
@@ -76,29 +83,11 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/BbsList.aspx");
+                Response.Redirect("~/Main.aspx");
 
             }
         }
 
-        public string GetConnectionString(string name = "BoardDB")
-        {
-            if (ConfigurationManager.ConnectionStrings[name] == null) return string.Empty;
-            else return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-        }
-
-        public string GetIP()
-        {
-            string localIP = string.Empty;
-            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, 0))
-            {
-                socket.Connect("8.8.8.8", 65530);
-                IPEndPoint endPoint = socket.LocalEndPoint as IPEndPoint;
-                localIP = endPoint.Address.ToString();
-            }
-            return localIP;
-
-        }
 
 
         protected void BtnCancel_Click(object sender, EventArgs e)

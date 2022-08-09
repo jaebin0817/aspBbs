@@ -61,9 +61,9 @@
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리3&c_no=3">카테고리3</a></li>
           </ul>        
           <div class="nav navbar-nav navbar-right">
-  
-              <input class="navsearch" id="navsearch" type="search"/>
-              <input class="navbtn" id="navbtn" type="submit" value="검색"/>
+              <asp:TextBox ID="navSearch" runat="server" CssClass="navsearch"></asp:TextBox>              
+              <asp:Button ID="btnSearch" runat="server" OnClick="BtnSearch_Click" Text="검색" CssClass="navbtn"></asp:Button>
+              
 
           </div>
         </div>

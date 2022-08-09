@@ -13,7 +13,6 @@
 }
 
 nav {
-    --padding-top: 18px;
     position: absolute;
     top:0;
     background-color: #7D9D9C;
@@ -71,9 +70,7 @@ body {
 .wrap {
     color: #303030;
     position: relative;
-    --top: 75px;
     width: 80%;
-    --min-height: 100%;
     margin: 75px 10% 20px;
     padding-top: 5px;
     padding-bottom: 40px;
@@ -102,13 +99,13 @@ body {
     height: 300px;
 }
 
+
 #hot-posts {
     background-color: lightgrey;
     position: absolute;
     left: 0;
     width: 50%;
     margin: auto;
-    --padding-left: 1.25%;
 }
 
 #new-posts {
@@ -117,7 +114,6 @@ body {
     right: 0;
     width: 50%;
     margin: auto;
-    --padding-left:1.25%;
 }
 
 
@@ -142,12 +138,15 @@ body {
     width: 45%;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    min-height: 50px;
+    min-height: 185px;
+    vertical-align: bottom;
 }
 
 .rec-post-title {
-    padding-left:5px;
-    font-weight:bold;
+    position: absolute;
+    bottom: 0;
+    padding-left: 5px;
+    font-weight: bold;
 }
 
 .rec-post-right {
@@ -158,23 +157,46 @@ body {
     width: 45%;
     margin-left: 2.5%;
     margin-right: 2.5%;
-    min-height: 50px;
+    min-height: 185px;
+    vertical-align: bottom;
 }
 
-.rec-thumb{
-    width:100%;
+.rec-thumb-wrap {
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 150px;
+}
+
+.rec-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
 }
 
 #list-title {
-    --background-color: #E4DCCF;
     color: black;
     position: relative;
     margin: 30px 5% 0;
     font-size: 15px;
     height: 20px;
     width: 90%;
-    --text-align: center;
     padding-left: 5px; 
+    font-weight: bold;
+}
+
+#list-write {
+    color: black;
+    position: relative;
+    right: 0;
+    margin: 0 5%;
+    font-size: 13px;
+    height: 20px;
+    width: 90%;
+    text-align: right;
+    padding-left: 5px;
     font-weight: bold;
 }
 
@@ -247,7 +269,6 @@ body {
 
 
 .more-wrap{
-    --background-color: white;
     margin:auto;
 }
 
@@ -275,9 +296,64 @@ body {
     background-color: #E4DCCF;
     position: relative;
     width: 90%;
-    min-height: 100px;
+    min-height: 120px;
     margin-top: 10px;
     margin: 10px 5%;
+}
+
+.reply-list-wrap {
+    position: relative;
+    top: 5px;
+    padding: 5px 10px;
+}
+
+.reply-write-wrap {
+    position: relative;
+    display: block;
+    height: 120px;
+    padding: 5px;
+    bottom: 3px;
+    width: 100%;
+}
+
+.reply-writer {
+    display: inline;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.reply-pw {
+    display: inline;
+    position: absolute;
+    top: 5px;
+    left: 210px;
+}
+
+.reply-cont {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 80%;
+    height: 70px;
+}
+
+.reply-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20%;
+    height: 70px;
+    padding-left:3%;
+}
+
+btnReply {
+    height:70px;
+
+}
+
+.reply-form {
+    width: 400px;
 }
 
 
@@ -324,7 +400,6 @@ body {
     font-size: 12px;
     padding: 5px;
     min-height: 350px;
-    --background-color: white;
     border-top: solid 1px ;
     border-bottom: solid 1px;
 }
@@ -348,7 +423,6 @@ body {
 
 
 .btn-wrap {
-    --background-color: #E4DCCF;
     position: relative;
     width: 90%;
     min-height: 30px;
@@ -358,7 +432,7 @@ body {
     text-align: center;
 }
 
-.btn-wrap button {
+.btn-lists {
     margin: auto;
     display: inline-block;
     font-weight: bold;
@@ -380,8 +454,6 @@ body {
     position: relative;
     left: 0;
     background-color: yellow;
-    height: 40px;
-    width: 150px;
 }
 
 .write-cont {
@@ -390,8 +462,6 @@ body {
     background-color: red;
     left: 150px;
     right: 0;
-    height: 40px;
-    width: 300px;
 }
 
 .write-form tbody {
@@ -418,4 +488,35 @@ body {
 .tb-btns {
     display: block;
     text-align: right;
+}
+
+.pw-table{
+    position: relative;
+    top: 30px;
+    margin:auto;
+}
+
+.pw-table td, th {
+    padding: 5px;
+}
+
+
+
+.reply-list-wrap a {
+    color: black;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.reply-list-wrap a:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#r_redgt_td {
+    font-size: 11px;
+}
+
+.r_content_td {
+    padding-bottom: 5px;
 }

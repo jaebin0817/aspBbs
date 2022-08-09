@@ -7,61 +7,140 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace WebApplication1
 {
     public partial class BbsRead : System.Web.UI.Page
     {
+        DBConn dbConn = new DBConn();
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            //카테고리명 조회
+            string selectCatString = "SELECT c_name FROM bbs_cat WHERE c_no=";
+            selectCatString += Request["c_no"];
+            DataRow cat = dbConn.GetRow(selectCatString);
+            lblP_cat.Text = cat["c_name"].ToString();
+
+            btnList.PostBackUrl = "~/BbsList.aspx?bbs_cat="+ cat["c_name"].ToString() + "&c_no=" + Request["c_no"];
+
             string updateString = "UPDATE bbs_post SET p_readcnt=p_readcnt+1 ";
             updateString += "WHERE p_no=" + Request["p_no"];
+            
 
             string selectString = "SELECT * FROM bbs_POST ";
-            selectString += "WHERE p_no=" + Request["p_no"];
+            selectString += "WHERE p_no=" + Request["p_no"];           
 
-            DataTable dt = GetData(selectString);
-            DataRow row = dt.Rows[0];           
+            DataRow row = dbConn.GetRow(selectString);           
 
             lblP_subject.Text = row["p_subject"].ToString();
             lblP_content.Text = row["p_content"].ToString();
             lblP_wname.Text = row["p_wname"].ToString();
             lblP_regdt.Text = row["p_regdt"].ToString();
-            lblP_readcnt.Text = row["p_readcnt"].ToString();
 
-            string selectCatString = "SELECT c_name FROM bbs_cat WHERE c_no=";
-            selectCatString += Request["c_no"];
-            DataTable catDt = GetData(selectCatString);
-            DataRow cat = catDt.Rows[0];
-            lblP_cat.Text = cat["c_name"].ToString();
+            //글 상세보기 눌렀을 때 조회수 증가
+            PlusReadcnt(updateString);
+            Int32.TryParse(row["p_readcnt"].ToString(), out int cnt);
+            int readcnt = cnt + 1;
+            lblP_readcnt.Text = readcnt.ToString();
 
+            lblDel.Text = "<a href='BbsPwcheck.aspx?mode=del&p_no=" + row["p_no"].ToString() + "'>삭제</a>";
+            lblMod.Text = "<a href='BbsPwcheck.aspx?mode=mod&p_no=" + row["p_no"].ToString() + "'>수정</a>";
 
+            //댓글 로드
+            dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE p_no=" + Request["p_no"] + " ORDER BY r_grpno DESC, r_grpord DESC ";
+
+            rptProduct.DataSource = dsrcProduct;
+            rptProduct.DataBind();
 
         }
 
-        private DataTable GetData(string selectString)
+
+        private void PlusReadcnt(string updateString)
         {
-            string strConn = GetConnectionString();
-            DataTable dt = new DataTable();
+            string strConn = dbConn.GetConnectionString();
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(updateString, conn);
+            cmd.ExecuteNonQuery();
+        }
+
+        protected void BtnLeft_Click(object sender, EventArgs e)
+        {
+            string prePostSelect = "SELECT MAX(p_no) AS p_no FROM bbs_post WHERE p_no<" + Request["p_no"] + " AND c_no=" + Request["c_no"];
+            DataTable preDt = dbConn.GetData(prePostSelect);
+
+            if (preDt == null)
+            {
+                MessageBox.Show("이전 페이지가 없습니다");
+            }
+            else
+            {
+                DataRow row = preDt.Rows[0];
+                Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString());
+            }
+        }
+
+
+        protected void BtnRight_Click(object sender, EventArgs e)
+        {
+            string nextPostSelect = "SELECT MIN(p_no) AS p_no FROM bbs_post WHERE p_no>" + Request["p_no"] + " AND c_no=" + Request["c_no"];
+            DataTable nextDt = dbConn.GetData(nextPostSelect);
+
+            if (nextDt == null)
+            {
+                MessageBox.Show("다음 페이지가 없습니다");
+            }
+            else
+            {
+                DataRow row = nextDt.Rows[0];
+                Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString());
+            }
+        }
+
+
+        protected void BtnReply_Click(object sender, EventArgs e)
+        {
+            string strConn = dbConn.GetConnectionString();
 
             using (SqlConnection conn = new SqlConnection(strConn))
             {
+                string insertString = "INSERT INTO bbs_reply(p_no, r_content, r_wname, r_pw, r_wip, r_regdt, r_grpno) ";
+                insertString += "VALUES(@p_no, @r_content, @r_wname, @r_pw, @r_wip, GETDATE(), (SELECT ISNULL(MAX(r_no), 0)+1 FROM bbs_reply))";
+
                 conn.Open();
+                SqlCommand cmd = new SqlCommand();
 
-                SqlDataAdapter adapter = new SqlDataAdapter(selectString, conn);
-                adapter.Fill(dt);
+                cmd.Parameters.AddWithValue("@p_no", Request["p_no"]);
+                cmd.Parameters.AddWithValue("@r_content", r_content.Text);
+                cmd.Parameters.AddWithValue("@r_wname", r_wname.Text);
+                cmd.Parameters.AddWithValue("@r_pw", r_pw.Text);
+                cmd.Parameters.AddWithValue("@r_wip", dbConn.GetIP());
+
+                cmd.Connection = conn;
+
+                try
+                {
+                    cmd.CommandText = insertString;
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception error)
+                {
+                    Response.Write(error.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + Request["p_no"]);
+
             }
-            return dt;
         }
+    
 
-
-
-
-        public string GetConnectionString(string name = "BoardDB")
-        {
-            if (ConfigurationManager.ConnectionStrings[name] == null) return string.Empty;
-            else return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-        }
 
     }
 }

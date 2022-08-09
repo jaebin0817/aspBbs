@@ -9,6 +9,7 @@
 
 
         <div class="list-title" id="list-title"></div>
+        <div class="list-write" id="list-write"><a href="BbsWrite.aspx">글쓰기</a></div>
 
         <asp:Repeater runat="server" ID="rptProduct">
             <ItemTemplate>
@@ -17,7 +18,7 @@
                     <div class="posts-title"><%# Eval("p_subject") %></div>
                     <div class="posts-cont"><%# Eval("p_content") %></div>
                     <div class="posts-info">
-                        <%# Eval("p_wname") %> <%# Eval("p_readcnt") %>
+                        <strong><%# Eval("p_wname") %></strong> &nbsp;|&nbsp; 조회수 <%# Eval("p_readcnt") %>
                     </div>
                     <div class="posts-thumb"><img src="/Uploads/<%# Eval("p_thumb") %>" class="thumb-img" /></div>
                     </a>
@@ -40,14 +41,14 @@
     <script>
 
         var title = searchParam('bbs_cat');
-        var keyword = searchParam('navsearch');
+        var keyword = searchParam('keyword');
 
         $(document).ready(function () {
 
             if (title != null) {
                 $("#list-title").html(title + " 게시글 목록");
             } else if (keyword != null) {
-                $("#list-title").html(keyword + " 게시글 목록");
+                $("#list-title").html("\"" + keyword + "\"" + " 검색 결과");
             } else {
                 $("#list-title").html("게시글 목록");
             }

@@ -8,6 +8,8 @@
             <h1>소개글 및 이미지</h1>
         </div>
 
+        <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">
+        </asp:SqlDataSource>
         
         <div id="rec-posts">
             <div id="hot-posts">
@@ -15,12 +17,20 @@
                   <p>인기글</p>
                 </div>
                 <div class="rec-post-left">
-                  <p><img src="/images/img.jpg" class="rec-thumb"/></p>
-                  <p class="rec-post-title">인기글1 제목</p>
+                  <p>
+                      <asp:Label runat="server" ID="lblP_hot_thumb1" CssClass="rec-thumb-wrap"></asp:Label>
+                  </p>
+                  <p class="rec-post-title">
+                      <asp:Label runat="server" ID="lblP_hot_title1"></asp:Label>
+                  </p>
                 </div>
                 <div class="rec-post-right">
-                  <p><img src="/images/img.jpg" class="rec-thumb"/></p>
-                  <p class="rec-post-title">인기글2 제목</p>
+                  <p>
+                       <asp:Label runat="server" ID="lblP_hot_thumb2" CssClass="rec-thumb-wrap"></asp:Label>
+                  </p>
+                  <p class="rec-post-title">
+                      <asp:Label runat="server" ID="lblP_hot_title2"></asp:Label>
+                  </p>
                 </div>
             </div>
             <div id="new-posts">
@@ -28,12 +38,20 @@
                   <p>최신글</p>
                 </div>
                 <div class="rec-post-left">
-                  <p><img src="/images/img.jpg" class="rec-thumb"/></p>
-                  <p class="rec-post-title">최신글1 제목</p>
+                  <p>
+                      <asp:Label runat="server" ID="lblP_new_thumb1" CssClass="rec-thumb-wrap"></asp:Label>
+                  </p>
+                  <p class="rec-post-title">
+                      <asp:Label runat="server" ID="lblP_new_title1"></asp:Label>
+                  </p>
                 </div>
                 <div class="rec-post-right">
-                  <p><img src="/images/img.jpg" class="rec-thumb"/></p>
-                  <p class="rec-post-title">최신글2 제목</p>
+                  <p>
+                      <asp:Label runat="server" ID="lblP_new_thumb2" CssClass="rec-thumb-wrap"></asp:Label>
+                  </p>
+                  <p class="rec-post-title">
+                      <asp:Label runat="server" ID="lblP_new_title2"></asp:Label>
+                  </p>
                 </div>
             </div>
         </div>

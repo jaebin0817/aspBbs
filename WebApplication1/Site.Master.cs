@@ -13,5 +13,13 @@ namespace WebApplication1
         {
 
         }
+
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            
+            Response.Redirect("~/BbsList.aspx?keyword=" + navSearch.Text);
+        }
+
+
     }
 }

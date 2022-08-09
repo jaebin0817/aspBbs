@@ -51,6 +51,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -107,7 +108,12 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="BbsList.aspx" />
+    <Content Include="BbsMsg.aspx" />
+    <Content Include="BbsPwcheck.aspx" />
     <Content Include="BbsRead.aspx" />
+    <Content Include="BbsReply.aspx" />
+    <Content Include="BbsSearch.aspx" />
+    <Content Include="BbsUpdate.aspx" />
     <Content Include="BbsWrite.aspx" />
     <Content Include="BbsWriteTest.aspx" />
     <Content Include="Contact.aspx" />
@@ -186,12 +192,47 @@
     <Compile Include="BbsList.aspx.designer.cs">
       <DependentUpon>BbsList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BbsMsg.aspx.cs">
+      <DependentUpon>BbsMsg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BbsMsg.aspx.designer.cs">
+      <DependentUpon>BbsMsg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BbsPwcheck.aspx.cs">
+      <DependentUpon>BbsPwcheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BbsPwcheck.aspx.designer.cs">
+      <DependentUpon>BbsPwcheck.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BbsRead.aspx.cs">
       <DependentUpon>BbsRead.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BbsRead.aspx.designer.cs">
       <DependentUpon>BbsRead.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BbsReply.aspx.cs">
+      <DependentUpon>BbsReply.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BbsReply.aspx.designer.cs">
+      <DependentUpon>BbsReply.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BbsSearch.aspx.cs">
+      <DependentUpon>BbsSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BbsSearch.aspx.designer.cs">
+      <DependentUpon>BbsSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BbsUpdate.aspx.cs">
+      <DependentUpon>BbsUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BbsUpdate.aspx.designer.cs">
+      <DependentUpon>BbsUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="BbsWrite.aspx.cs">
       <DependentUpon>BbsWrite.aspx</DependentUpon>
@@ -207,6 +248,7 @@
     <Compile Include="BbsWriteTest.aspx.designer.cs">
       <DependentUpon>BbsWriteTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FileUpload.cs" />
     <Compile Include="DBConn.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
