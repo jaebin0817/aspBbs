@@ -12,7 +12,7 @@
             <tr>
                 <th>비밀번호</th>
                 <td>
-                    <asp:TextBox ID="typed_pw" runat="server" TextMode="Password" OnLoad="Typed_pw_OnLoad"></asp:TextBox>                  
+                    <asp:TextBox ID="typed_pw" runat="server" TextMode="Password" OnLoad="Typed_pw_OnLoad"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Button ID="btnCheck" runat="server" Text="확인" OnClick="BtnCheck_Click" />
@@ -21,6 +21,12 @@
             <tr>
                 <td></td>
                 <td id="alert-field" colspan="2">
+                    <asp:RequiredFieldValidator ID="rfvP_pw" runat="server" ErrorMessage="비밀번호를 입력해주세요" 
+                          Display="Dynamic" ControlToValidate="typed_pw" SetFocusOnError="true">
+                    </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="revP_pw" runat="server" ErrorMessage="비밀번호는 4자 이상 10자 이하여야 합니다"
+                          Display="Dynamic" ControlToValidate="typed_pw" SetFocusOnError="true" ValidationExpression="\w{4,10}">
+                    </asp:RegularExpressionValidator>
                     <asp:Label runat="server" ID="lblAlert"></asp:Label>
                 </td>
                 
@@ -50,24 +56,6 @@
             $("#p_pw").focus();
 
         });
-
-        function delConfirm() {
-            var p_pw = document.getElementById("p_pw").value;
-            var flag = false;
-
-            //alert(p_pw.length);
-
-            if (p_pw.length >= 4 && p_pw.length <= 10) {
-                if (confirm('삭제된 내용은 복구되지 않습니다.\n삭제하시겠습니까?')) {
-                    flag = true;
-                }
-            } else {
-                $("#alert-field").prepend().text("비밀번호는 4글자 이상 10글자 이하로 입력해주세요");                
-            }
-
-            return flag;
-        }
-
 
         $("#p_pw").focus(function () {
             $("#alert-field").empty();

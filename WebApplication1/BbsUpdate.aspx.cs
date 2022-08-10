@@ -126,7 +126,7 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/Main.aspx");
+                Response.Redirect("~/BbsRead.aspx?c_no="+ c_no.Text + "&p_no=" + row["p_no"].ToString());
 
             }
         }

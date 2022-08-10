@@ -98,6 +98,11 @@ namespace WebApplication1
             else return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/BbsList.aspx?keyword=" + navSearch.Text);
+        }
+
 
     }//main end
 }//namespace end

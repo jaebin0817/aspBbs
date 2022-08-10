@@ -15,6 +15,7 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["mode"] == "del") { lblMsg.Text = "삭제 성공"; }
+            if (Request["mode"] == "ins") { lblMsg.Text = "글 작성 성공"; }
 
         }
 

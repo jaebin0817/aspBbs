@@ -5,7 +5,7 @@
     <div class="wrap">
 
         <div class="col-1" id="intro">
-            <h1>소개글 및 이미지</h1>
+            <img id="mainimg" src="/images/main.png" />
         </div>
 
         <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">
@@ -54,6 +54,10 @@
                   </p>
                 </div>
             </div>
+        </div>
+        <div class="search-wrap">
+              <asp:TextBox ID="navSearch" runat="server" CssClass="navsearch" placeholder="작성자, 제목, 내용"></asp:TextBox>              
+              <asp:Button ID="btnSearch" runat="server" OnClick="BtnSearch_Click" Text="검색" CssClass="navbtn"></asp:Button>   
         </div>
 
         

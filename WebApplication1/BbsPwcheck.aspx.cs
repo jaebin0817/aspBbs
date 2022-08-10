@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.Security;
 using System.IO;
-
+using System.Windows.Forms;
 
 namespace WebApplication1
 {
@@ -39,27 +39,32 @@ namespace WebApplication1
 
                     if (Request["mode"] == "del")
                     {
-                        sql = "DELETE FROM bbs_post";
-                        sql += " WHERE p_no=" + Request["p_no"];
-                        sql += " AND p_pw=@p_pw";
+                        DialogResult dr = MessageBox.Show("삭제된 내용은 복구되지 않습니다.\n삭제하시겠습니까?", "", MessageBoxButtons.YesNo);
 
-                        string selectString = "SELECT p_thumb FROM bbs_post WHERE p_no=" + Request["p_no"];
-                        DBConn dbConn = new DBConn();
-                        DataRow row = dbConn.GetRow(selectString);
-                        string fileName = row["p_thumb"].ToString();
+                        if(dr == DialogResult.Yes)
+                        {
+                            sql = "DELETE FROM bbs_post";
+                            sql += " WHERE p_no=" + Request["p_no"];
+                            sql += " AND p_pw=@p_pw";
 
-                        cmd.Parameters.AddWithValue("@p_pw", typed_pw.Text);
-                        cmd.Connection = conn;
+                            string selectString = "SELECT p_thumb FROM bbs_post WHERE p_no=" + Request["p_no"];
+                            DBConn dbConn = new DBConn();
+                            DataRow row = dbConn.GetRow(selectString);
+                            string fileName = row["p_thumb"].ToString();
 
-                        cmd.CommandText = sql;
-                        int cnt = cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@p_pw", typed_pw.Text);
+                            cmd.Connection = conn;
 
-                        if (cnt != 0)
-                        {//삭제 성공
-                            string savePath = Server.MapPath("~/Uploads") + @"\";
-                            
-                            File.Delete(savePath + fileName);
-                            Response.Redirect("~/BbsMsg.aspx?mode=del");                         
+                            cmd.CommandText = sql;
+                            int cnt = cmd.ExecuteNonQuery();
+
+                            if (cnt != 0)
+                            {//삭제 성공
+                                string savePath = Server.MapPath("~/Uploads") + @"\";
+
+                                File.Delete(savePath + fileName);
+                                Response.Redirect("~/BbsMsg.aspx?mode=del");
+                            }
                         }
 
                     }
@@ -69,25 +74,31 @@ namespace WebApplication1
                     }
                     else if (Request["mode"] == "r_del")
                     {
-                        sql = "DELETE FROM bbs_reply";
-                        sql += " WHERE r_no=" + Request["r_no"];
-                        sql += " AND r_pw=@r_pw";
+                        DialogResult dr = MessageBox.Show("삭제된 내용은 복구되지 않습니다.\n삭제하시겠습니까?", "", MessageBoxButtons.YesNo);
 
-                        cmd.Parameters.AddWithValue("@r_pw", typed_pw.Text);
-                        cmd.Connection = conn;
+                        if (dr == DialogResult.Yes)
+                        {
+                            sql = "DELETE FROM bbs_reply";
+                            sql += " WHERE r_no=" + Request["r_no"];
+                            sql += " AND r_pw=@r_pw";
 
-                        cmd.CommandText = sql;
-                        int cnt = cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@r_pw", typed_pw.Text);
+                            cmd.Connection = conn;
 
-                        if (cnt != 0)
-                        {//삭제 성공
-                            Response.Redirect("~/BbsMsg.aspx?mode=del");
+                            cmd.CommandText = sql;
+                            int cnt = cmd.ExecuteNonQuery();
+
+                            if (cnt != 0)
+                            {//삭제 성공
+                                Response.Redirect("~/BbsMsg.aspx?mode=del");
+                            }
+
                         }
 
                     }
                     else if (Request["mode"] == "r_mod")
                     {
-                        Response.Redirect("~/BbsReply.aspx?mode=r_mod&r_no=" + Request["r_no"]);
+                        Response.Redirect("~/BbsReplyMod.aspx?r_no=" + Request["r_no"]);
                     }
                 }
             }

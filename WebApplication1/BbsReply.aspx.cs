@@ -16,10 +16,12 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE r_no=" + Request["r_no"];
+            dsrcProduct.SelectCommand = "SELECT A.*, B.c_no FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE r_no=" + Request["r_no"];
 
             rptProduct.DataSource = dsrcProduct;
             rptProduct.DataBind();
+            
+
         }
 
 
@@ -29,11 +31,13 @@ namespace WebApplication1
 
             using (SqlConnection conn = new SqlConnection(strConn))
             {
-                string selectString = "SELECT * FROM bbs_reply WHERE r_no=" + Request["r_no"];
+                string selectString = "SELECT A.*, B.c_no FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE r_no=" + Request["r_no"];
                 DataRow row = dbConn.GetRow(selectString);
 
+                string updateString = "UPDATE bbs_reply SET r_grpord=r_grpord+1 WHERE r_grpord>@r_grpord AND r_grpno=@r_grpno";
+
                 string insertString = "INSERT INTO bbs_reply(p_no, r_content, r_wname, r_pw, r_wip, r_regdt, r_grpno, r_grpord, r_indent) ";
-                insertString += "VALUES(@p_no, @r_content, @r_wname, @r_pw, @r_wip, GETDATE(), @r_grpno, @r_grpord, @r_indent)";
+                insertString += "VALUES(@p_no, @r_content, @r_wname, @r_pw, @r_wip, GETDATE(), @r_grpno, @r_grpord+1, @r_indent)";
 
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
@@ -51,13 +55,16 @@ namespace WebApplication1
                 cmd.Parameters.AddWithValue("@r_pw", r_pw.Text);
                 cmd.Parameters.AddWithValue("@r_wip", dbConn.GetIP());
                 cmd.Parameters.AddWithValue("@r_grpno", row["r_grpno"].ToString());
-                cmd.Parameters.AddWithValue("@r_grpord", r_grpord);///////////////////////////////////이거해야함
+                cmd.Parameters.AddWithValue("@r_grpord", r_grpord);
                 cmd.Parameters.AddWithValue("@r_indent", r_indent+1);
 
                 cmd.Connection = conn;
 
                 try
                 {
+                    cmd.CommandText = updateString;
+                    cmd.ExecuteNonQuery();
+
                     cmd.CommandText = insertString;
                     cmd.ExecuteNonQuery();
                 }
@@ -70,10 +77,13 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + Request["p_no"]);
+                Response.Redirect("~/BbsRead.aspx?c_no=" + row["p_no"].ToString() + "&p_no=" + row["p_no"].ToString());
 
             }
         }
+
+
+
 
 
     }

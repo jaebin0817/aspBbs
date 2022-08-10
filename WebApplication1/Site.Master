@@ -60,12 +60,7 @@
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리2&c_no=2">카테고리2</a></li>
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리3&c_no=3">카테고리3</a></li>
           </ul>        
-          <div class="nav navbar-nav navbar-right">
-              <asp:TextBox ID="navSearch" runat="server" CssClass="navsearch"></asp:TextBox>              
-              <asp:Button ID="btnSearch" runat="server" OnClick="BtnSearch_Click" Text="검색" CssClass="navbtn"></asp:Button>
-              
 
-          </div>
         </div>
       </div>
     </nav>

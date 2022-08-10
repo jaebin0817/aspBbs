@@ -35,9 +35,21 @@
                 </div>
                 <div class="reply-btn">
                     <asp:Button ID="btnReply" runat="server" Text="답글 작성" OnClick="BtnReply_Click" CssClass="btnReply"/>
+                    <asp:RequiredFieldValidator ID="rfvR_wname" runat="server" ErrorMessage="작성자를 입력해주세요" 
+                          Display="Dynamic" ControlToValidate="r_wname" SetFocusOnError="true">
+                    </asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="rfvR_pw" runat="server" ErrorMessage="비밀번호를 입력해주세요" 
+                          Display="Dynamic" ControlToValidate="r_pw" SetFocusOnError="true">
+                    </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="revR_pw" runat="server" ErrorMessage="비밀번호는 4자 이상 10자 이하여야 합니다"
+                          Display="Dynamic" ControlToValidate="r_pw" SetFocusOnError="true" ValidationExpression="\w{4,10}">
+                    </asp:RegularExpressionValidator>
+                    <asp:RequiredFieldValidator ID="rfvR_content" runat="server" ErrorMessage="댓글 내용을 입력해주세요" 
+                          Display="Dynamic" ControlToValidate="r_content" SetFocusOnError="true">
+                    </asp:RequiredFieldValidator>
                 </div>
             </div>
 
-
+        </div>
     </div>
 </asp:Content>

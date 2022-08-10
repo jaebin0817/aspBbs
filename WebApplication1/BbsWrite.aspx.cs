@@ -83,7 +83,8 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/Main.aspx");
+                Response.Redirect("~/BbsMsg.aspx?mode=ins");
+
 
             }
         }

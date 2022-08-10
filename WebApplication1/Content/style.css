@@ -57,9 +57,13 @@ nav {
     border-radius: 3px;
 }
 
+.search-wrap{
+    margin:auto;
+    width: 300px;
+}
+
 body {
     background-color: #F0EBE3;
-
 }
 
 #body-wrapper {
@@ -84,12 +88,20 @@ body {
 
 
 #intro {
-    background-color: lightgrey;
+    --background-color: lightgrey;
     position: relative;
     margin-top: 30px;
     width: 100%;
     height: 250px;
     text-align: center;
+    overflow: hidden;
+}
+
+#mainimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
 }
 
 #rec-posts {
@@ -270,6 +282,7 @@ body {
 
 .more-wrap{
     margin:auto;
+    padding-bottom:40px;
 }
 
 .more-btn {
@@ -519,4 +532,15 @@ btnReply {
 
 .r_content_td {
     padding-bottom: 5px;
+}
+
+#msg-wrap {
+    min-height:120px;
+    margin: auto;
+    text-align: center;
+    padding-top: 40px;
+}
+
+a{
+    color: black;
 }

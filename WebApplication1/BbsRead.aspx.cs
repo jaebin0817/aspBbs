@@ -17,13 +17,21 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             //카테고리명 조회
             string selectCatString = "SELECT c_name FROM bbs_cat WHERE c_no=";
             selectCatString += Request["c_no"];
             DataRow cat = dbConn.GetRow(selectCatString);
             lblP_cat.Text = cat["c_name"].ToString();
 
-            btnList.PostBackUrl = "~/BbsList.aspx?bbs_cat="+ cat["c_name"].ToString() + "&c_no=" + Request["c_no"];
+            if(Request["keyword"] == null)
+            { 
+                btnList.PostBackUrl = "~/BbsList.aspx?bbs_cat="+ cat["c_name"].ToString() + "&c_no=" + Request["c_no"];
+            }
+            else
+            {
+                btnList.PostBackUrl = "~/BbsList.aspx?keyword=" + Request["keyword"];
+            }
 
             string updateString = "UPDATE bbs_post SET p_readcnt=p_readcnt+1 ";
             updateString += "WHERE p_no=" + Request["p_no"];
@@ -49,7 +57,7 @@ namespace WebApplication1
             lblMod.Text = "<a href='BbsPwcheck.aspx?mode=mod&p_no=" + row["p_no"].ToString() + "'>수정</a>";
 
             //댓글 로드
-            dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE p_no=" + Request["p_no"] + " ORDER BY r_grpno DESC, r_grpord DESC ";
+            dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE p_no=" + Request["p_no"] + " ORDER BY r_grpno DESC, r_grpord ASC ";
 
             rptProduct.DataSource = dsrcProduct;
             rptProduct.DataBind();
@@ -71,16 +79,12 @@ namespace WebApplication1
         {
             string prePostSelect = "SELECT MAX(p_no) AS p_no FROM bbs_post WHERE p_no<" + Request["p_no"] + " AND c_no=" + Request["c_no"];
             DataTable preDt = dbConn.GetData(prePostSelect);
+            DataRow row = preDt.Rows[0];
 
-            if (preDt == null)
-            {
-                MessageBox.Show("이전 페이지가 없습니다");
-            }
-            else
-            {
-                DataRow row = preDt.Rows[0];
-                Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString());
-            }
+            if(row["p_no"].ToString() == "") { MessageBox.Show("이전페이지가 없습니다"); }
+            else { Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString()); }
+
+            
         }
 
 
@@ -88,16 +92,11 @@ namespace WebApplication1
         {
             string nextPostSelect = "SELECT MIN(p_no) AS p_no FROM bbs_post WHERE p_no>" + Request["p_no"] + " AND c_no=" + Request["c_no"];
             DataTable nextDt = dbConn.GetData(nextPostSelect);
+            DataRow row = nextDt.Rows[0];
 
-            if (nextDt == null)
-            {
-                MessageBox.Show("다음 페이지가 없습니다");
-            }
-            else
-            {
-                DataRow row = nextDt.Rows[0];
-                Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString());
-            }
+            if (row["p_no"].ToString() == "") { MessageBox.Show("다음 페이지가 없습니다"); }
+            else { Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString()); }
+
         }
 
 
@@ -138,8 +137,40 @@ namespace WebApplication1
                 Response.Redirect("~/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + Request["p_no"]);
 
             }
+
         }
-    
+
+        protected string ShowIndent(int indent)
+        {
+            string returnString = "";
+            for (int i = 0; i < indent; i++)
+            {
+                returnString += "&nbsp;&nbsp;&nbsp;";
+            }
+            return returnString;
+        }
+
+        protected string ShowReplyIcon(int indent)
+        {
+            string returnString = "";
+            if (indent != 0)
+            {
+                returnString += "<img src='/images/reply_icon.png' />";
+            }
+            return returnString;
+        }
+
+        protected string ShowReplySpace(int indent)
+        {
+            string returnString = "";
+            if (indent != 0)
+            {
+                returnString += "<img src='/images/reply_space.png' />";
+            }
+            return returnString;
+        }
+
+
 
 
     }
