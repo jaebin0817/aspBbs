@@ -94,7 +94,8 @@ namespace WebApplication1
 
                     cmd.Parameters.AddWithValue("@p_thumb", fileName);
 
-                    File.Delete(savePath + old_thumb);
+                    if (old_thumb != "noimg.png") { File.Delete(savePath + old_thumb); }
+                    
 
                 }
                 else

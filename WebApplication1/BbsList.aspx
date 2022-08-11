@@ -29,16 +29,14 @@
 
 
         <div class="more-wrap">
-            <input type="hidden" id="nowPage" value="1" />
-            <input type="hidden" id="no" value="1" />
-            <input type="button" id="more-btn" class="more-btn" value="목록 더보기" />
+            <asp:HiddenField ID="nowPage" runat="server" />
+            <asp:Button ID="btnMore" CssClass="more-btn" runat="server" Text="목록 더보기" OnClick="BtnMore_Click" />
         </div>
 
         <div class="search-wrap">
               <asp:TextBox ID="navSearch" runat="server" CssClass="navsearch" placeholder="작성자, 제목, 내용"></asp:TextBox>              
               <asp:Button ID="btnSearch" runat="server" OnClick="BtnSearch_Click" Text="검색" CssClass="navbtn"></asp:Button>   
         </div>
-        <input type="hidden" id="keyword"/>
 
 
 
@@ -62,49 +60,6 @@
             }
         
         });
-
-
-        $("#more-btn").click(function () {  		    			
-			var nowPage=parseInt($('#nowPage').val());
-			var newNowPage = nowPage+1;				
-			$('#nowPage').attr('value', newNowPage);		            
-
-            loadNext();
-        });
-
-        function loadNext() {
-
-            var num = parseInt($("#no").val());
-
-            alert($('#nowPage').val());
-            $.ajax({
-                url: "morecontents.aspx",
-                type: "get",
-                data: {
-                    nowPage: $('#nowPage').val(),
-                    c_no: searchParam('c_no'),
-                    keyword: searchParam('keyword'),
-                },
-                success: function (data) {
-                    $.each(data, function (index, value) {
-                        $(".posts-list").append("<div class='posts-wrap' id='morepost" + num + "'>");
-
-                        $("#morepost" + num).append("<a id='morepostLink" + num + " href='BbsRead.aspx?c_no=" + value.c_no + "&p_no=" + value.p_no + "'>");
-
-                        $("#morepostLink" + num).append("<div class='posts-title'>" + value.p_subject + "</div>");
-                        $("#morepostLink" + num).append("<div class='posts-cont'>" + value.p_content + "</div>");
-                        $("#morepostLink" + num).append("<div class='posts-info'><strong>" + value.p_wname + "</strong>&nbsp;|&nbsp; 조회수" + value.p_readcnt + "</div>");
-                        $("#morepostLink" + num).append("<div class='posts-thumb'><img src='/Uploads/" + value.p_thumb + "' class='thumb-img' /></div>");
-                        num++;
-                    })
-                    $('#no').attr('value', num);
-                },
-                error: function (error) {
-                    alert("에러: " + error);
-                }	
-
-            });
-        }
 
     </script>
 

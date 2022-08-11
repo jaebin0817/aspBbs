@@ -71,7 +71,7 @@
                    <th class="tb-btns">
                        <asp:Button id="btnWrite" runat="server" OnClick="BtnWrite_Click" Text="쓰기"/>
                        <asp:Button id="btnCancel" runat="server" OnClick="BtnCancel_Click" Text="취소"/>
-                       <asp:Button id="btnList" runat="server" Text="목록" PostBackUrl="~/BbsList.aspx" CausesValidation="false" />  
+                       <asp:Button id="btnList" runat="server" Text="HOME" PostBackUrl="~/Main.aspx" CausesValidation="false" />  
                    </th>
               </tr>
           </table>

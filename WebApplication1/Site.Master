@@ -24,7 +24,7 @@
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager ID="ScriptManager" runat="server" EnablePartialRendering="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -59,6 +59,7 @@
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리1&c_no=1">카테고리1</a></li>
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리2&c_no=2">카테고리2</a></li>
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리3&c_no=3">카테고리3</a></li>
+              	<li><a href="BbsList.aspx?bbs_cat=카테고리4&c_no=4">카테고리4</a></li>
           </ul>        
 
         </div>

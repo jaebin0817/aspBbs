@@ -3,25 +3,51 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
+using System.Web.Script.Services;
+using System.Data.SqlClient;
+using System.Configuration;
+using Newtonsoft.Json;
+using Dapper;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace WebApplication1
 {
-    public partial class morecontents : System.Web.UI.Page
+    //class BbsPost
+    //{
+    //    public int p_no { get; set; }
+    //    public int c_no { get; set; }
+    //    public string p_subject { get; set; }
+    //    public string p_content { get; set; }
+    //    public string p_wname { get; set; }
+    //    public string p_wip { get; set; }
+    //    public string p_pw { get; set; }
+    //    public string p_thumb { get; set; }
+    //    public string p_regdt { get; set; }
+    //    public int p_readcnt { get; set; }
+    //    public string p_open { get; set; }
+    //}
+
+    public partial class MoreContents : System.Web.UI.Page
     {
-        DBConn dbConn = new DBConn();
 
-        protected DataTable Page_Load(object sender, EventArgs e)
+
+        protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-
-            string selectString = "SELECT * FROM bbs_post WHERE c_no=" + Request["c_no"] + " ORDER BY p_no DESC";
-
-            dbConn.GetData(selectString);
-
-            return dt;
-
+            if (!IsPostBack)
+            {
+                nowPage.Value = "1";
+            }
         }
+
+        [WebMethod]
+        public static string MorePosts()
+        {
+            return "ajax메시지";
+        }
+
+
     }
 }

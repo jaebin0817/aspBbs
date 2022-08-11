@@ -61,8 +61,8 @@ namespace WebApplication1
                             if (cnt != 0)
                             {//삭제 성공
                                 string savePath = Server.MapPath("~/Uploads") + @"\";
-
-                                File.Delete(savePath + fileName);
+                                if(fileName!= "noimg.png") { File.Delete(savePath + fileName); }
+                                
                                 Response.Redirect("~/BbsMsg.aspx?mode=del");
                             }
                         }

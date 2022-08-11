@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
@@ -16,12 +11,10 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            dsrcProduct.SelectCommand = "SELECT A.*, B.c_no FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE r_no=" + Request["r_no"];
+            dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE r_no=" + Request["r_no"];
 
             rptProduct.DataSource = dsrcProduct;
-            rptProduct.DataBind();
-            
-
+            rptProduct.DataBind();        
         }
 
 
@@ -46,8 +39,7 @@ namespace WebApplication1
                 int.TryParse(str_grpord, out int r_grpord);
 
                 string str_indent = row["r_indent"].ToString();
-                int.TryParse(str_indent, out int r_indent);
-                    
+                int.TryParse(str_indent, out int r_indent);    
 
                 cmd.Parameters.AddWithValue("@p_no", row["p_no"].ToString());
                 cmd.Parameters.AddWithValue("@r_content", r_content.Text);
@@ -77,7 +69,7 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/BbsRead.aspx?c_no=" + row["p_no"].ToString() + "&p_no=" + row["p_no"].ToString());
+                Response.Redirect("~/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
 
             }
         }
