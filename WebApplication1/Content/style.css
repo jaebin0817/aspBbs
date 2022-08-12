@@ -88,7 +88,6 @@ body {
 
 
 #intro {
-    --background-color: lightgrey;
     position: relative;
     margin-top: 30px;
     width: 100%;
@@ -455,6 +454,14 @@ btnReply {
     padding: 4px 10px;
 }
 
+.btn-paging {
+    font-size:small;
+    margin: auto;
+    display: inline-block;
+    background-color: #F0EBE3;
+    border: solid 0px;
+}
+
 .write-form {
     position: relative;
     width: 450px;
@@ -543,4 +550,9 @@ btnReply {
 
 a{
     color: black;
+}
+
+.paging-tb{
+    margin:auto;
+    text-align:center;
 }

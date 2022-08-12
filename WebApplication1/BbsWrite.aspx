@@ -57,7 +57,7 @@
               </tr>
               <tr>
                   <th>썸네일 이미지</th>
-                  <td><asp:FileUpload id="p_thumb" runat="server" CssClass="form-control"></asp:FileUpload></td>
+                  <td><asp:FileUpload id="p_thumb" runat="server" CssClass="form-control" ></asp:FileUpload></td>
               </tr>
               <tr>
                    <th>게시글 공개</th>

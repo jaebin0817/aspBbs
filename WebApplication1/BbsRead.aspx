@@ -82,9 +82,9 @@
         </div>
         <div class="btn-wrap">
           
-            <asp:Button id="btnLeft" runat="server" Text="◁" CausesValidation="false" CssClass="btn-lists" OnClick="BtnLeft_Click" />
+            <asp:Button id="btnLeft" runat="server" Text="◁ 이전" CausesValidation="false" CssClass="btn-lists" OnClick="BtnLeft_Click" />
             <asp:Button id="btnList" runat="server" Text="목록" CausesValidation="false" CssClass="btn-lists" />
-            <asp:Button id="btnRight" runat="server" Text="▷" CausesValidation="false" CssClass="btn-lists" OnClick="BtnRight_Click" />
+            <asp:Button id="btnRight" runat="server" Text="다음 ▷" CausesValidation="false" CssClass="btn-lists" OnClick="BtnRight_Click" />
                       
         </div>
     </div>`

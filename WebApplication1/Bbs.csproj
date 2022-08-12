@@ -150,7 +150,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="MoreContents.aspx" />
-    <Content Include="morecontents.html" />
     <Content Include="Scripts\bbsScript.js" />
     <Content Include="SqlDataSourceTest.aspx" />
     <Content Include="test.aspx" />
@@ -203,6 +202,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BbsList.aspx.cs">
       <DependentUpon>BbsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="BbsList.aspx.designer.cs">
       <DependentUpon>BbsList.aspx</DependentUpon>
@@ -303,6 +303,7 @@
     <Compile Include="MoreContents.aspx.designer.cs">
       <DependentUpon>MoreContents.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
