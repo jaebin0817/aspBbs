@@ -17,7 +17,7 @@
               <tr>
                   <th>비밀번호</th>
                   <td>
-                      <asp:TextBox id="p_pw" runat="server" TextMode="Password" MaxLength="20" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox id="p_pw" runat="server" TextMode="Password" MaxLength="10" CssClass="form-control"></asp:TextBox>
                       <asp:RequiredFieldValidator ID="rfvP_pw" runat="server" ErrorMessage="비밀번호를 입력해주세요" 
                           Display="Dynamic" ControlToValidate="p_pw" SetFocusOnError="true">
                       </asp:RequiredFieldValidator>
@@ -40,7 +40,7 @@
               <tr>
                   <th>제목</th>
                   <td>
-                      <asp:TextBox id="p_subject" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox id="p_subject" runat="server" MaxLength="50" CssClass="form-control"></asp:TextBox>
                       <asp:RequiredFieldValidator ID="rfvP_subject" runat="server" ErrorMessage="제목을 입력해주세요" 
                           Display="Dynamic" ControlToValidate="p_subject" SetFocusOnError="true">
                       </asp:RequiredFieldValidator>
@@ -57,7 +57,10 @@
               </tr>
               <tr>
                   <th>썸네일 이미지</th>
-                  <td><asp:FileUpload id="p_thumb" runat="server" CssClass="form-control" ></asp:FileUpload></td>
+                  <td>
+                      <asp:FileUpload id="p_thumb" runat="server" CssClass="form-control" ></asp:FileUpload>
+                      <h6>이미지 파일(.jpg, .jpeg, .png, .gif)만 업로드 가능합니다</h6>
+                  </td>
               </tr>
               <tr>
                    <th>게시글 공개</th>
@@ -78,4 +81,21 @@
 
 
     </div>
+    <script>
+
+        $("#MainContent_p_thumb").change(function () {
+            var filename = $("#MainContent_p_thumb").val();
+            //alert(filename);
+            if (filename != "") {
+                var ext = filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
+                var imgExt = ["jpg", "jpeg", "png", "gif"];
+
+                if (!(imgExt.includes(ext))) {
+                    alert("이미지 파일만 업로드 가능합니다");
+                    $("#MainContent_p_thumb").val("");
+                }
+            }
+        });
+        
+    </script>
  </asp:Content>

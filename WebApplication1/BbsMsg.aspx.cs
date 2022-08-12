@@ -16,6 +16,13 @@ namespace WebApplication1
         {
             if (Request["mode"] == "del") { lblMsg.Text = "삭제 성공"; }
             if (Request["mode"] == "ins") { lblMsg.Text = "글 작성 성공"; }
+            if (Request["mode"] == "fileTypeError") {
+                string msg = "글 작성 실패<br/>";
+                msg += "이미지 파일만 업로드 가능합니다<br/>";
+                msg += "(.jpg, .jpeg, .png, .gif )<br/><br/>";
+                msg += "<a href='javascript:history.back();'>뒤로 가기</a>";
+                lblMsg.Text = msg;
+            }
 
         }
 

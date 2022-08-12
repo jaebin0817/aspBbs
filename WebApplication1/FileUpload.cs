@@ -30,5 +30,19 @@ public class FileUpload
         return fileName;
     }
 
+    public bool ImageFileCheck(string fileName)
+    {
+        bool flag = false;
+        string extension = System.IO.Path.GetExtension(fileName);
+        string[] imgExtension = new string[] {".jpg", ".jpeg", ".png", ".gif" };
+
+        if(Array.Exists(imgExtension, element => element == extension))
+        {
+            flag = true;
+        }
+
+        return flag;
+    }
+
 
 }

@@ -58,7 +58,17 @@
           </tr>
           <tr>
               <th>썸네일 이미지</th>
-              <td><asp:FileUpload id="p_thumb" runat="server" CssClass="form-control"></asp:FileUpload></td>
+              <td>
+                  <asp:FileUpload id="p_thumb" ClientID="p_thumb" runat="server" CssClass="form-control"></asp:FileUpload>
+              </td>
+          </tr>
+          <tr>
+              <th>썸네일 이미지</th>
+              <td>
+                  <input type="file" id="uploadfile"  onchange="ExtCheck()" runat="server" />
+                  <asp:Button id="fileTest" runat="server" Text="파일업로드테스트" OnClick="FileTest_Click"/>
+                  <asp:Label ID="UploadStatusLabel" runat="server"></asp:Label>
+              </td>
           </tr>
           <tr>
                <th>게시글 공개</th>
@@ -80,4 +90,20 @@
 
 
   </div>
+
+        <script>
+
+            function ExtCheck() {
+                var filename = $("#uploadfile").val();
+                alert(filename);
+            }
+
+        $("#MainContent_p_thumb").change(function () {
+            var filename = $("#MainContent_p_thumb").val();
+            alert(filename);
+        });
+
+        
+    </script>
+
 </asp:Content>

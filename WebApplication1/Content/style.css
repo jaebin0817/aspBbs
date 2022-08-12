@@ -203,12 +203,16 @@ body {
     position: relative;
     right: 0;
     margin: 0 5%;
-    font-size: 13px;
+    font-size: 10px;
     height: 20px;
     width: 90%;
     text-align: right;
     padding-left: 5px;
-    font-weight: bold;
+}
+
+#list-write a {
+    font-size: 14px;
+    font-weight: bolder;
 }
 
 .posts-wrap {
@@ -414,6 +418,8 @@ btnReply {
     min-height: 350px;
     border-top: solid 1px ;
     border-bottom: solid 1px;
+    word-wrap:break-word;
+    white-space: pre-wrap;
 }
 
 .post-mng {

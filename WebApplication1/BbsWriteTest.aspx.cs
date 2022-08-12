@@ -41,10 +41,24 @@ namespace WebApplication1
 
                 if (p_thumb.HasFile)
                 {
-                    string fileName = Server.MapPath("~/Uploads") + @"\" + p_thumb.FileName;
-                    p_thumb.SaveAs(fileName);
+                    string savePath = Server.MapPath("~/Uploads") + @"\";
+                    string fileName = p_thumb.FileName;
 
-                    cmd.Parameters.AddWithValue("@p_thumb", p_thumb.FileName);
+                    FileUpload fu = new FileUpload();
+
+                    if (fu.ImageFileCheck(fileName))
+                    {
+                        fileName = fu.FileNameCheck(fileName, savePath);
+
+                        p_thumb.SaveAs(savePath + fileName);
+
+                        cmd.Parameters.AddWithValue("@p_thumb", fileName);
+                    }
+                    else
+                    {
+                        Response.Redirect("~/BbsMsg.aspx?mode=fileTypeError");
+                    }
+
 
                 }
                 else
@@ -100,5 +114,12 @@ namespace WebApplication1
 
         }
 
+        protected void FileTest_Click(object sender, EventArgs e)
+        {
+            string savePath = Server.MapPath("~/Uploads") + @"\";
+            string fileName = uploadfile.PostedFile.FileName.ToString();
+
+            uploadfile.PostedFile.SaveAs(savePath+fileName);
+        }
     }
 }

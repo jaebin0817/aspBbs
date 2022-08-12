@@ -47,11 +47,17 @@ namespace WebApplication1
                     string fileName = p_thumb.FileName;
 
                     FileUpload fu = new FileUpload();
-                    fileName = fu.FileNameCheck(fileName, savePath);
 
-                    p_thumb.SaveAs(savePath+fileName);
-
-                    cmd.Parameters.AddWithValue("@p_thumb", fileName);
+                    if (fu.ImageFileCheck(fileName))
+                    {
+                        fileName = fu.FileNameCheck(fileName, savePath);
+                        p_thumb.SaveAs(savePath + fileName);
+                        cmd.Parameters.AddWithValue("@p_thumb", fileName);
+                    }
+                    else
+                    {
+                        Response.Redirect("~/BbsList.aspx?mode=fileTypeError");
+                    }
 
                 }
                 else
@@ -83,8 +89,7 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/BbsMsg.aspx?mode=ins");
-
+                Response.Redirect("~/BbsList.aspx?c_no" + c_no.Text);
 
             }
         }

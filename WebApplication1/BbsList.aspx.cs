@@ -44,32 +44,43 @@ namespace WebApplication1
             lblPage.Text = pages.ToString();
             lblNowPage.Text = nowPage;
 
-            if (nPage == 1) { btnPrev.Visible = false; }
-            else { btnPrev.Visible = true; }
-
-            if (nPage == pages) { btnNext.Visible = false; }
-            else { btnNext.Visible = true; }
-
-            if (pageGroup == 1)
+            if (nPage == 1)
             {
-                btnPrev10.Visible = false;
+                btnPrev.Visible = false;
                 btnFirst.Visible = false;
             }
             else
             {
-                btnPrev10.Visible = true;
+                btnPrev.Visible = true;
                 btnFirst.Visible = true;
+            }
+
+            if (nPage == pages)
+            {
+                btnNext.Visible = false;
+                btnLast.Visible = false;
+            }
+            else
+            {
+                btnNext.Visible = true;
+                btnLast.Visible = true;
+            }
+
+            if (pageGroup == 1)
+            {
+                btnPrev10.Visible = false;
+            }
+            else
+            {
+                btnPrev10.Visible = true;
             }
 
             if (pageGroup == lastPageGroup)
             {
                 btnNext10.Visible = false;
-                btnLast.Visible = false;
             }
             else {
                 btnNext10.Visible = true;
-                btnLast.Visible = true;
-
             }
 
 

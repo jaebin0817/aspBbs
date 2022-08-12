@@ -12,7 +12,7 @@
             <tr>
                 <th>비밀번호</th>
                 <td>
-                    <asp:TextBox ID="typed_pw" runat="server" TextMode="Password" OnLoad="Typed_pw_OnLoad"></asp:TextBox>
+                    <asp:TextBox ID="typed_pw" runat="server" MaxLength="10" TextMode="Password" OnLoad="Typed_pw_OnLoad"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Button ID="btnCheck" runat="server" Text="확인" OnClick="BtnCheck_Click" />

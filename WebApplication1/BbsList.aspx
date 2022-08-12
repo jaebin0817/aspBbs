@@ -7,9 +7,11 @@
         <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">
         </asp:SqlDataSource>
 
-        총 게시글 수 : <asp:Label ID="lblCount" runat="server" /> (page : <asp:Label ID="lblNowPage" runat="server" /> / <asp:Label ID="lblPage" runat="server" />)
         <div class="list-title" id="list-title"></div>
-        <div class="list-write" id="list-write"><a href="BbsWrite.aspx">글쓰기</a></div>
+        <div class="list-write" id="list-write">
+            총 게시글 수 : <asp:Label ID="lblCount" runat="server" /> (page : <asp:Label ID="lblNowPage" runat="server" /> / <asp:Label ID="lblPage" runat="server" />) &nbsp;&nbsp;&nbsp;
+            <a href="BbsWrite.aspx">[ 글쓰기 ]</a>
+        </div>
         <div class="posts-list" id="posts-list">
         <asp:Repeater runat="server" ID="rptProduct">
             <ItemTemplate>

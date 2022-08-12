@@ -88,14 +88,18 @@ namespace WebApplication1
                     string fileName = p_thumb.FileName;
 
                     FileUpload fu = new FileUpload();
-                    fileName = fu.FileNameCheck(fileName, savePath);
 
-                    p_thumb.SaveAs(savePath + fileName);
-
-                    cmd.Parameters.AddWithValue("@p_thumb", fileName);
-
-                    if (old_thumb != "noimg.png") { File.Delete(savePath + old_thumb); }
-                    
+                    if (fu.ImageFileCheck(fileName))
+                    {
+                        fileName = fu.FileNameCheck(fileName, savePath);
+                        p_thumb.SaveAs(savePath + fileName);
+                        cmd.Parameters.AddWithValue("@p_thumb", fileName);
+                        if (old_thumb != "noimg.png") { File.Delete(savePath + old_thumb); }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/BbsMsg.aspx?mode=fileTypeError");
+                    }
 
                 }
                 else
