@@ -45,15 +45,15 @@ namespace WebApplication1
                 query.Append("SELECT * FROM");
                 query.Append(" (");
                 query.Append("SELECT *, ROW_NUMBER() OVER(ORDER BY p_no DESC) AS rownum");
-                query.Append(" FROM bbs_post WHERE");
+                query.Append(" FROM bbs_post ");
 
-                if (keyword == null)
+                if (c_no != null)
                 {
-                    query.Append(" c_no=" + c_no);
+                    query.Append("WHERE c_no=" + c_no);
                 }
-                else
+                else if (keyword !=null)
                 {
-                    query.Append(" p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%'");
+                    query.Append("WHERE p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%'");
                 }
 
                 query.Append(")A WHERE A.rownum BETWEEN " + start_id + "AND " + end_id);
@@ -71,14 +71,14 @@ namespace WebApplication1
 
             System.Text.StringBuilder countString = new System.Text.StringBuilder();
 
-            countString.Append("SELECT COUNT(*) AS cnt FROM bbs_post WHERE ");
-            if (keyword == null)
+            countString.Append("SELECT COUNT(*) AS cnt FROM bbs_post ");
+            if (c_no != null)
             {
-                countString.Append("c_no=" + c_no);
+                countString.Append("WHERE c_no=" + c_no);
             }
-            else
+            else if(keyword != null)
             {
-                countString.Append("p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%'");
+                countString.Append("WHERE p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%'");
             }
 
             DataRow row = dbConn.GetRow(countString.ToString());

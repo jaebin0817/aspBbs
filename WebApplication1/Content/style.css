@@ -416,9 +416,10 @@ btnReply {
     font-size: 12px;
     padding: 5px;
     min-height: 350px;
-    border-top: solid 1px ;
+    border-top: solid 1px;
     border-bottom: solid 1px;
-    word-wrap:break-word;
+    word-wrap: break-word;
+    word-break: break-word;
     white-space: pre-wrap;
 }
 

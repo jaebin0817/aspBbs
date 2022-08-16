@@ -84,16 +84,18 @@ namespace WebApplication1
             }
 
 
-            string url = "/BbsList.aspx";
+            string url = "/BbsList.aspx?";
 
-            if (keyword == null)
+            if (c_no != null)
             {
-                url += "?bbs_cat=" + bbs_cat + "&c_no=" + c_no + "&nowPage=";
+                url += "bbs_cat=" + bbs_cat + "&c_no=" + c_no + "&";
             }
-            else
+            else if (keyword != null)
             {
-                url += "?keyword=" + keyword + "&nowPage=";
+                url += "keyword=" + keyword + "&";
             }
+
+            url += "nowPage=";
 
             btnPrev.PostBackUrl = url + (nPage - 1);
             btnNext.PostBackUrl = url + (nPage + 1);
