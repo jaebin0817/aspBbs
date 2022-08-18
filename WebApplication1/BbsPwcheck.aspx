@@ -6,7 +6,9 @@
         <table class="pw-table">
 
             <tr>
-                <td id="mode-info" colspan="3"></td>
+                <td id="mode-info" colspan="3">
+                    <asp:Label runat="server" ID="lblModeInfo"></asp:Label>위해 글 작성시 입력했던 비밀번호를 입력해주세요
+                </td>
             </tr>
 
             <tr>
@@ -31,6 +33,11 @@
                 </td>
                 
             </tr>
+            <tr>
+                <td id="btn-back" colspan="2">
+                    <asp:HyperLink runat="server" ID="hyperBack"><img src="/Images/back.png" /></asp:HyperLink>
+                </td>
+            </tr>
 
         </table>
         
@@ -39,28 +46,10 @@
 
     <script>
 
-        var mode = searchParam('mode');
-
-        $(document).ready(function () {
-
-            if (mode == 'del') {
-                $("#mode-info").prepend().text("삭제를 위해 글 작성시 입력했던 비밀번호를 입력해주세요");
-            } else if (mode == 'mod') {
-                $("#mode-info").prepend().text("수정을 위해 글 작성시 입력했던 비밀번호를 입력해주세요");
-            } else if (mode == 'r_mod') {
-                $("#mode-info").prepend().text("댓글 수정을 위해 댓글 작성시 입력한 비밀번호를 입력해주세요");
-            } else if (mode == 'r_del') {
-                $("#mode-info").prepend().text("댓글 삭제를 위해 댓글 작성시 입력한 비밀번호를 입력해주세요");
-            }
-
-            $("#p_pw").focus();
-
+        $("#MainContent_typed_pw").focusin(function () {
+            $("#MainContent_lblAlert").empty();
         });
-
-        $("#p_pw").focus(function () {
-            $("#alert-field").empty();
-        });
-
+            
 
     </script>
 

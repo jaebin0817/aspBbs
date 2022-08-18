@@ -36,7 +36,6 @@ namespace WebApplication1
             using (var db = new SqlConnection(ConfigurationManager.ConnectionStrings["BoardDB"].ConnectionString))
             {
 
-
                 int start_id, end_id;
                 start_id = (now_page - 1) * PAGE_SIZE + 1;
                 end_id = now_page * PAGE_SIZE;
@@ -47,13 +46,19 @@ namespace WebApplication1
                 query.Append("SELECT *, ROW_NUMBER() OVER(ORDER BY p_no DESC) AS rownum");
                 query.Append(" FROM bbs_post ");
 
-                if (c_no != null)
+                if (c_no != null && !(c_no.Equals("")) )
                 {
                     query.Append("WHERE c_no=" + c_no);
                 }
-                else if (keyword !=null)
+                else if (keyword != null && !(keyword.Equals("")))
                 {
-                    query.Append("WHERE p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%'");
+                    SqlParameter parameter = new SqlParameter("@keyword", SqlDbType.VarChar);
+
+                    keyword = keyword.Replace("'", "''");
+
+                    parameter.Value = keyword;
+                    query.Append("WHERE p_subject LIKE '%"+@keyword+ "%' OR p_wname LIKE '%" + @keyword + "%' OR p_content LIKE '%" + @keyword + "%'");
+
                 }
 
                 query.Append(")A WHERE A.rownum BETWEEN " + start_id + "AND " + end_id);
@@ -72,13 +77,16 @@ namespace WebApplication1
             System.Text.StringBuilder countString = new System.Text.StringBuilder();
 
             countString.Append("SELECT COUNT(*) AS cnt FROM bbs_post ");
-            if (c_no != null)
+            if (c_no != null && !(c_no.Equals("")))
             {
                 countString.Append("WHERE c_no=" + c_no);
             }
-            else if(keyword != null)
+            else if (keyword != null && !(keyword.Equals("")))
             {
-                countString.Append("WHERE p_subject LIKE '%" + keyword + "%' OR p_wname LIKE '%" + keyword + "%' OR p_content LIKE '%" + keyword + "%'");
+                SqlParameter parameter = new SqlParameter("@keyword", SqlDbType.VarChar);
+                keyword = keyword.Replace("'", "''");
+                parameter.Value = keyword;
+                countString.Append($"WHERE p_subject LIKE '%{@keyword}%' OR p_wname LIKE '%{@keyword}%' OR p_content LIKE '%{@keyword}%'");
             }
 
             DataRow row = dbConn.GetRow(countString.ToString());

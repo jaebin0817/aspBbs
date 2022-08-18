@@ -9,12 +9,24 @@ namespace WebApplication1
 {
     public partial class SiteMaster : MasterPage
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+        protected void HyperAll_Unload(object sender, EventArgs e)
+        {
 
+        }
+
+        protected void LinkCat1_Click(object sender, EventArgs e)
+        {
+
+
+            //Response.Redirect("~/ListTest.aspx");
+
+        }
 
 
     }

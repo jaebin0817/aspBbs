@@ -16,11 +16,46 @@ namespace WebApplication1
 {
     public partial class BbsPwcheck : System.Web.UI.Page
     {
-
+       
         DBConn dbConn = new DBConn();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            String mode = Request["mode"];
+            if (mode == "del" || mode == "mod")
+                hyperBack.NavigateUrl = "BbsRead.aspx?c_no="+ Request["c_no"] + "&p_no="+Request["p_no"];
+            else if (mode == "r_mod" || mode == "r_del")
+            {
+                string selectString = "SELECT A.p_no, B.c_no  FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE A.r_no=" + Request["r_no"];
+                DataRow row = dbConn.GetRow(selectString);
+                string p_no = row["p_no"].ToString();
+                string c_no = row["c_no"].ToString();
+
+                hyperBack.NavigateUrl = "BbsRead.aspx?c_no=" + c_no + "&p_no=" + p_no;
+            }
+
+
+            if (mode == "del")
+            {
+                lblModeInfo.Text = "삭제를 ";
+            }
+            else if (mode == "mod")
+            {
+                lblModeInfo.Text = "수정을 ";
+            }
+            else if (mode == "r_mod")
+            {
+                lblModeInfo.Text = "댓글 수정을 ";
+            }
+            else if (mode == "r_del")
+            {
+                lblModeInfo.Text = "댓글 삭제를 ";
+            }
+            else if (Request["mode"] == null)
+            {
+                MessageBox.Show("잘못된 접근입니다");
+                Response.Redirect("BbsList.aspx");
+            }
 
         }
 
@@ -78,11 +113,18 @@ namespace WebApplication1
 
                         if (dr == DialogResult.Yes)
                         {
-                            sql = "DELETE FROM bbs_reply";
-                            sql += " WHERE r_no=" + Request["r_no"];
-                            sql += " AND r_pw=@r_pw";
+                            string selectString = "SELECT A.p_no, B.c_no  FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE A.r_no=" + Request["r_no"];
+                            DataRow row = dbConn.GetRow(selectString);
+                            string p_no = row["p_no"].ToString();
+                            string c_no = row["c_no"].ToString();
 
-                            cmd.Parameters.AddWithValue("@r_pw", typed_pw.Text);
+
+                            sql += "UPDATE bbs_reply";
+                            sql += " SET r_content='삭제된 댓글입니다', r_wname='', r_regdt='' ";
+                            sql += " WHERE r_no=" + Request["r_no"];
+                            //sql += " AND r_pw=@r_pw";
+
+                            //cmd.Parameters.AddWithValue("@r_pw", typed_pw.Text);
                             cmd.Connection = conn;
 
                             cmd.CommandText = sql;
@@ -90,7 +132,7 @@ namespace WebApplication1
 
                             if (cnt != 0)
                             {//삭제 성공
-                                Response.Redirect("~/BbsMsg.aspx?mode=del");
+                                Response.Redirect("~/BbsRead.aspx?c_no=" + c_no + "&p_no=" + p_no);
                             }
 
                         }
@@ -145,6 +187,11 @@ namespace WebApplication1
         protected void Typed_pw_OnLoad(object sender, EventArgs e)
         {
             lblAlert.Text = "";
+        }
+
+        protected void BtnBack_Click(object sender, ImageClickEventArgs e)
+        {
+
         }
     }
 }

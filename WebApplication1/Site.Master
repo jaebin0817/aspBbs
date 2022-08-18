@@ -19,11 +19,13 @@
     <link rel="stylesheet" href="/Content/bootstrap-theme.css"/> 
     <link rel="stylesheet" href="/Content/style.css"/>
     <script src="/Scripts/bbsScript.js"></script>
+    <script src="/Scripts/bbsReplyScript.js"></script>
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script>history.pushState({}, null, location.pathname);</script>
 
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" method="post">
         <asp:ScriptManager ID="ScriptManager" runat="server" EnablePartialRendering="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -56,13 +58,15 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-left">
-            	<li><a href="BbsList.aspx">전체글</a></li>
+<%--            	<li><asp:HyperLink ID="hyperAll" NavigateUrl="ListTest.aspx" OnUnload="HyperAll_Unload" runat="server">전체글</asp:HyperLink></li>
+            	<li><asp:LinkButton ID="linkCat1" OnClick="LinkCat1_Click" runat="server">카테고리1</asp:LinkButton></li>--%>
+
+                <li><a href="BbsList.aspx">전체글</a></li>
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리1&c_no=1">카테고리1</a></li>
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리2&c_no=2">카테고리2</a></li>
 	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리3&c_no=3">카테고리3</a></li>
               	<li><a href="BbsList.aspx?bbs_cat=카테고리4&c_no=4">카테고리4</a></li>
           </ul>        
-
         </div>
       </div>
     </nav>

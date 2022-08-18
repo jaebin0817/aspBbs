@@ -2,6 +2,83 @@
     return new URLSearchParams(location.search).get(key);
 };
 
+function bbsWriteCheck() {
+
+    var pNamelen = $("#MainContent_p_wname").val().length;
+    var pPwlen = $("#MainContent_p_pw").val().length;
+    var pSublen = $("#MainContent_p_subject").val().length;
+    var pContlen = $("#MainContent_p_content").val().length;
+
+    //alert(pSublen);
+
+    if (pNamelen < 2 || pNamelen > 10) {
+        alert("작성자는 2글자 이상 10글자 이하로 입력해주세요");
+        $("#MainContent_p_wname").focus();
+        return false;
+    }
+
+    if (pPwlen < 4 || pPwlen > 10) {
+        alert("비밀번호는 4글자 이상 10글자 이하로 입력해주세요");
+        $("#MainContent_p_pw").focus();
+        return false;
+    }
+
+    if (pSublen < 2 || pSublen > 50) {
+        alert("제목은 2글자 이상 50글자 이하로 입력해주세요");
+        $("#MainContent_p_subject").focus();
+        return false;
+    }
+
+    if (pContlen == 0) {
+        alert("내용을 입력해주세요");
+        $("#MainContent_p_content").focus();
+        return false;
+    }
+
+    if (pContlen > 20000) {
+        alert("게시글 내용은 20000자 이하로 입력해주세요");
+        var cont = $("#MainContent_p_content").val().substring(0, 20000);
+        $("#MainContent_p_content").val(cont);
+        $("#MainContent_p_content").focus();
+        return false;
+    }
+
+    return true;
+
+}
+
+
+
+function imgFileCheck() {
+    var filename = $("#MainContent_p_thumb").val();
+    var filesize = $("#MainContent_p_thumb")[0].files[0].size;
+    var maxsize = 3 * 1024 * 1024;
+    var thumbname = filename.slice(filename.lastIndexOf("\\") + 1);
+
+    //alert(filesize);
+    //alert(filename);
+    //alert(thumbname.length);
+
+    if (filename != "") {
+        var ext = filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
+        var imgExt = ["jpg", "jpeg", "png", "gif"];
+
+        if (!(imgExt.includes(ext))) {
+            alert("이미지 파일만 업로드 가능합니다");
+            $("#MainContent_p_thumb").val("");
+        } else {
+            if (filesize > maxsize) {
+                alert("3MB 이하의 파일만 업로드 가능합니다");
+                $("#MainContent_p_thumb").val("");
+            }
+            if (thumbname.length > 20) {
+                alert("이미지 파일명은 확장자명 포함 20자 이하만 가능합니다");
+                $("#MainContent_p_thumb").val("");
+            }
+        }
+
+    }
+}
 
 
 function pwcheck() {

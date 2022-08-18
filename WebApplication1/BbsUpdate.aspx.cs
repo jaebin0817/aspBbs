@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
-
+using System.Windows.Forms;
 
 namespace WebApplication1
 {
@@ -25,6 +25,12 @@ namespace WebApplication1
                 selectString += "WHERE p_no=" + Request["p_no"];
 
                 DataTable dt = dbConn.GetData(selectString);
+                if (dt == null)
+                {
+                    MessageBox.Show("잘못된 접근입니다");
+                    Response.Redirect("BbsList.aspx");
+                }
+                    
                 DataRow row = dt.Rows[0];
 
                 btnRead.PostBackUrl = "~/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + Request["p_no"];

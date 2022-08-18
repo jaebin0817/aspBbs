@@ -5,7 +5,7 @@
     <div class="wrap">
 
         <div class="col-1" id="intro">
-            <img id="mainimg" src="/images/main.png" />
+            <a href="BbsList.aspx" ><img id="mainimg" src="/images/main.png" /></a>            
         </div>
 
         <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">
@@ -57,9 +57,13 @@
         </div>
         <div class="search-wrap">
               <asp:TextBox ID="navSearch" runat="server" CssClass="navsearch" placeholder="작성자, 제목, 내용"></asp:TextBox>              
-              <asp:Button ID="btnSearch" runat="server" OnClick="BtnSearch_Click" Text="검색" CssClass="navbtn"></asp:Button>   
+              <asp:Button ID="btnSearch" runat="server" OnClick="BtnSearch_Click" Text="검색" CssClass="navbtn"></asp:Button><br />
+<%--              <asp:RequiredFieldValidator ID="rfvSearch" runat="server" ErrorMessage="검색어를 입력해주세요" 
+                    Display="Dynamic" ControlToValidate="navSearch" SetFocusOnError="true">
+              </asp:RequiredFieldValidator>   --%>
         </div>
-
+        <asp:HiddenField ID="hfCat" runat="server" />
+        <asp:HiddenField ID="hfCno" runat="server" />
         
     </div>
 </asp:Content>

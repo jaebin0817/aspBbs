@@ -68,8 +68,12 @@ namespace WebApplication1
             }
         }
 
+        protected void BtnBack_Click(object sender, EventArgs e)
+        {
+            string selectString = "SELECT A.p_no, B.c_no FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE r_no=" + Request["r_no"];
+            DataRow row = dbConn.GetRow(selectString);
+            Response.Redirect("~/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
 
-
-
+        }
     }
 }

@@ -14,7 +14,15 @@ namespace WebApplication1
             dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE r_no=" + Request["r_no"];
 
             rptProduct.DataSource = dsrcProduct;
-            rptProduct.DataBind();        
+            rptProduct.DataBind();
+
+            string selectString = "SELECT A.p_no, B.c_no  FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE A.r_no=" + Request["r_no"];
+            DataRow row = dbConn.GetRow(selectString);
+            string p_no = row["p_no"].ToString();
+            string c_no = row["c_no"].ToString();
+
+            hyperBack.NavigateUrl = "BbsRead.aspx?c_no=" + c_no + "&p_no=" + p_no;
+
         }
 
 

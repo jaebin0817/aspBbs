@@ -7,19 +7,27 @@ using System.Configuration;
 using Dapper;
 using System.Data;
 using System.Windows.Forms;
+using System.Web.UI;
 
 namespace WebApplication1
 {
-
-
-
-    public partial class BbsList : System.Web.UI.Page
+    public partial class ListTest : System.Web.UI.Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if(PreviousPage != null)
+            {
+                //SiteMaster pp = PreviousPage as SiteMaster;
+
+
+
+            }
+
+
             Paging pg = new Paging();
+
+
+
 
             string nowPage = Request["nowPage"];
             if (nowPage == null) { nowPage = "1"; }
@@ -27,11 +35,11 @@ namespace WebApplication1
             Int32.TryParse(nowPage, out int nPage);
             Double.TryParse(nowPage, out double nPageDo);
 
-            string bbs_cat = Request["bbs_cat"];
-            string c_no = Request["c_no"];
+            string bbs_cat = hfCat.Value.ToString();
+            string c_no = hfCno.Value.ToString();
             string keyword = Request["keyword"];
 
-            if (bbs_cat != null)
+            if (bbs_cat != null || bbs_cat != "")
             {
                 lblTitle.Text = bbs_cat + " 게시글 목록";
             }
@@ -92,7 +100,8 @@ namespace WebApplication1
             {
                 btnNext10.Visible = false;
             }
-            else {
+            else
+            {
                 btnNext10.Visible = true;
             }
 
@@ -123,13 +132,13 @@ namespace WebApplication1
             int endPage = pageGroup * pg.PAGE_GRP_SIZE;
             string strPaging = "";
 
-            for(int i=startPage; i<=endPage; i++)
+            for (int i = startPage; i <= endPage; i++)
             {
-                if(i == nPage) { strPaging += "<strong>"; }
-                strPaging += "<a href='"+ url + i +"'>" + i + "</a> ";
+                if (i == nPage) { strPaging += "<strong>"; }
+                strPaging += "<a href='" + url + i + "'>" + i + "</a> ";
                 if (i == nPage) { strPaging += "</strong>"; }
 
-                if(i == pages) { break; }
+                if (i == pages) { break; }
             }
 
             lblPaging.Text = strPaging;
@@ -141,8 +150,6 @@ namespace WebApplication1
         {
             Response.Redirect("~/BbsList.aspx?keyword=" + navSearch.Text);
         }
-
-
 
     }
 }

@@ -149,10 +149,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ListTest.aspx" />
     <Content Include="MoreContents.aspx" />
+    <Content Include="Scripts\bbsReplyScript.js" />
     <Content Include="Scripts\bbsScript.js" />
     <Content Include="SqlDataSourceTest.aspx" />
     <Content Include="test.aspx" />
+    <Content Include="testAction.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Main.aspx" />
@@ -289,6 +292,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ListTest.aspx.cs">
+      <DependentUpon>ListTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListTest.aspx.designer.cs">
+      <DependentUpon>ListTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -332,6 +342,13 @@
     </Compile>
     <Compile Include="test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testAction.aspx.cs">
+      <DependentUpon>testAction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testAction.aspx.designer.cs">
+      <DependentUpon>testAction.aspx</DependentUpon>
     </Compile>
     <Compile Include="ValuesController1.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">

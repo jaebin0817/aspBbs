@@ -11,7 +11,9 @@
                 <asp:Label runat="server" ID="lblP_regdt"></asp:Label>&nbsp;|&nbsp;
                 조회수&nbsp;<asp:Label runat="server" ID="lblP_readcnt"></asp:Label>
             </div>
-            <div class="post-cont"><asp:Label runat="server" ID="lblP_content"></asp:Label></div>
+            <div class="post-cont"><asp:Label runat="server" ID="lblP_content"></asp:Label>
+                <asp:Label runat="server" ID="lblImage"></asp:Label>
+            </div>
             <div class="post-mng">
                 <asp:Label runat="server" ID="lblMod"></asp:Label>
                 ·
@@ -33,10 +35,13 @@
                                     <%# ShowIndent((int)Eval("r_indent"))%>
                                     <%# ShowReplyIcon((int)Eval("r_indent"))%>
                                     <strong><%# Eval("r_wname") %></strong>&nbsp;&nbsp;
-                                    <span id="r_redgt_td"><%# Eval("r_regdt") %>&nbsp;&nbsp;</span>
-                                    <a href="BbsPwcheck.aspx?mode=r_mod&r_no=<%# Eval("r_no") %>">수정</a>&nbsp;
-                                    <a href="BbsPwcheck.aspx?mode=r_del&r_no=<%# Eval("r_no") %>">삭제</a>&nbsp;
-                                    <a href="BbsReply.aspx?mode=r_re&r_no=<%# Eval("r_no") %>">답글</a>&nbsp;
+                                    <span id="r_redgt_td"><%# Eval("r_regdt").ToString() !="1900-01-01 오전 12:00:00" ? Eval("r_regdt") : "" %>&nbsp;&nbsp;</span>
+                                    <a href="BbsPwcheck.aspx?mode=r_mod&r_no=<%# Eval("r_no") %>">
+                                        <%# Eval("r_wname").ToString() !="" ? "수정" : "" %></a>&nbsp;
+                                    <a href="BbsPwcheck.aspx?mode=r_del&r_no=<%# Eval("r_no") %>">
+                                        <%# Eval("r_wname").ToString() !="" ? "삭제" : "" %></a>&nbsp;
+                                    <a href="BbsReply.aspx?mode=r_re&r_no=<%# Eval("r_no") %>">
+                                        <%# Eval("r_wname").ToString() !="" ? "답글" : "" %></a>&nbsp;
                                 </td>
                             </tr>
                             <tr>                                
@@ -54,28 +59,16 @@
             </div>
             <div class="reply-write-wrap">
                 <div class="reply-writer">
-                    <asp:TextBox ID="r_wname" runat="server" placeholder="작성자" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="r_wname" runat="server" placeholder="작성자" MaxLength="10" CssClass="form-control"></asp:TextBox>
                 </div>                
                 <div class="reply-pw">
-                    <asp:TextBox ID="r_pw" runat="server" TextMode="Password" placeholder="비밀번호"  CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="r_pw" runat="server" TextMode="Password" placeholder="비밀번호" MaxLength="10" CssClass="form-control"></asp:TextBox>
                 </div>
                 <div class="reply-cont">
-                    <asp:TextBox ID="r_content" runat="server" TextMode="MultiLine" CssClass="form-control" Rows="3" Columns="300"></asp:TextBox>
+                    <asp:TextBox ID="r_content" runat="server" TextMode="MultiLine" MaxLength="250" CssClass="form-control" Rows="3" Columns="300"></asp:TextBox>
                 </div>
                 <div class="reply-btn">
-                    <asp:Button ID="btnReply" runat="server" Text="댓글 작성" OnClick="BtnReply_Click" CssClass="btnReply"/><br />
-                    <asp:RequiredFieldValidator ID="rfvR_wname" runat="server" ErrorMessage="작성자를 입력해주세요" 
-                          Display="Dynamic" ControlToValidate="r_wname" SetFocusOnError="true">
-                    </asp:RequiredFieldValidator>
-                    <asp:RequiredFieldValidator ID="rfvR_pw" runat="server" ErrorMessage="비밀번호를 입력해주세요" 
-                          Display="Dynamic" ControlToValidate="r_pw" SetFocusOnError="true">
-                    </asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator ID="revR_pw" runat="server" ErrorMessage="비밀번호는 4자 이상 10자 이하여야 합니다"
-                          Display="Dynamic" ControlToValidate="r_pw" SetFocusOnError="true" ValidationExpression="\w{4,10}">
-                    </asp:RegularExpressionValidator>
-                    <asp:RequiredFieldValidator ID="rfvR_content" runat="server" ErrorMessage="댓글 내용을 입력해주세요" 
-                          Display="Dynamic" ControlToValidate="r_content" SetFocusOnError="true">
-                    </asp:RequiredFieldValidator>
+                    <asp:Button ID="btnReply" runat="server" Text="댓글 작성" OnClientClick="return replyCheck()" OnClick="BtnReply_Click" CssClass="btnReply"/><br />
                 </div>
             </div>
 
@@ -87,6 +80,14 @@
             <asp:Button id="btnRight" runat="server" Text="다음 ▷" CausesValidation="false" CssClass="btn-lists" OnClick="BtnRight_Click" />
                       
         </div>
-    </div>`
+    </div>
+    <script>
+        $("MainContent_btnReply").click(function () {
+
+            replyCheck();
+
+        });
+
+    </script>
 
 </asp:Content>

@@ -8,7 +8,7 @@
               <tr>
                   <th>작성자</th>
                   <td>
-                      <asp:TextBox id="p_wname" runat="server" MaxLength="20" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox id="p_wname" runat="server" MaxLength="10" CssClass="form-control"></asp:TextBox>
                       <asp:RequiredFieldValidator ID="rfvP_wname" runat="server" ErrorMessage="작성자를 입력해주세요" 
                           Display="Dynamic" ControlToValidate="p_wname" SetFocusOnError="true">
                       </asp:RequiredFieldValidator>
@@ -72,7 +72,7 @@
               <tr>
                   <th></th>
                    <th class="tb-btns">
-                       <asp:Button id="btnWrite" runat="server" OnClick="BtnWrite_Click" Text="쓰기"/>
+                       <asp:Button id="btnWrite" runat="server" OnClientClick="return bbsWriteCheck()" OnClick="BtnWrite_Click" Text="쓰기"/>
                        <asp:Button id="btnCancel" runat="server" OnClick="BtnCancel_Click" Text="취소"/>
                        <asp:Button id="btnList" runat="server" Text="HOME" PostBackUrl="~/Main.aspx" CausesValidation="false" />  
                    </th>
@@ -82,20 +82,9 @@
 
     </div>
     <script>
-
         $("#MainContent_p_thumb").change(function () {
-            var filename = $("#MainContent_p_thumb").val();
-            //alert(filename);
-            if (filename != "") {
-                var ext = filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
-                var imgExt = ["jpg", "jpeg", "png", "gif"];
-
-                if (!(imgExt.includes(ext))) {
-                    alert("이미지 파일만 업로드 가능합니다");
-                    $("#MainContent_p_thumb").val("");
-                }
-            }
+            imgFileCheck();
         });
-        
+
     </script>
  </asp:Content>

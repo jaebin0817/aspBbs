@@ -10,150 +10,159 @@
 namespace WebApplication1 {
     
     
-    public partial class BbsUpdate {
+    public partial class ListTest {
         
         /// <summary>
-        /// p_wname 컨트롤입니다.
+        /// dsrcProduct 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox p_wname;
+        protected global::System.Web.UI.WebControls.SqlDataSource dsrcProduct;
         
         /// <summary>
-        /// rfvP_wname 컨트롤입니다.
+        /// lblTitle 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_wname;
+        protected global::System.Web.UI.WebControls.Label lblTitle;
         
         /// <summary>
-        /// p_pw 컨트롤입니다.
+        /// lblCount 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox p_pw;
+        protected global::System.Web.UI.WebControls.Label lblCount;
         
         /// <summary>
-        /// rfvP_pw 컨트롤입니다.
+        /// lblNowPage 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_pw;
+        protected global::System.Web.UI.WebControls.Label lblNowPage;
         
         /// <summary>
-        /// revP_pw 컨트롤입니다.
+        /// lblPage 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revP_pw;
+        protected global::System.Web.UI.WebControls.Label lblPage;
         
         /// <summary>
-        /// c_no 컨트롤입니다.
+        /// rptProduct 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList c_no;
+        protected global::System.Web.UI.WebControls.Repeater rptProduct;
         
         /// <summary>
-        /// p_subject 컨트롤입니다.
+        /// btnPrev10 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox p_subject;
+        protected global::System.Web.UI.WebControls.Button btnPrev10;
         
         /// <summary>
-        /// rfvP_subject 컨트롤입니다.
+        /// lblPaging 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_subject;
+        protected global::System.Web.UI.WebControls.Label lblPaging;
         
         /// <summary>
-        /// p_content 컨트롤입니다.
+        /// btnNext10 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox p_content;
+        protected global::System.Web.UI.WebControls.Button btnNext10;
         
         /// <summary>
-        /// rfvP_content 컨트롤입니다.
+        /// btnFirst 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_content;
+        protected global::System.Web.UI.WebControls.Button btnFirst;
         
         /// <summary>
-        /// p_thumb 컨트롤입니다.
+        /// btnPrev 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload p_thumb;
+        protected global::System.Web.UI.WebControls.Button btnPrev;
         
         /// <summary>
-        /// old_o_thumb 컨트롤입니다.
+        /// btnNext 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label old_o_thumb;
+        protected global::System.Web.UI.WebControls.Button btnNext;
         
         /// <summary>
-        /// p_open_y 컨트롤입니다.
+        /// btnLast 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton p_open_y;
+        protected global::System.Web.UI.WebControls.Button btnLast;
         
         /// <summary>
-        /// p_open_n 컨트롤입니다.
+        /// hfCat 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton p_open_n;
+        protected global::System.Web.UI.WebControls.HiddenField hfCat;
         
         /// <summary>
-        /// btnUpdate 컨트롤입니다.
+        /// hfCno 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdate;
+        protected global::System.Web.UI.WebControls.HiddenField hfCno;
         
         /// <summary>
-        /// btnRead 컨트롤입니다.
+        /// navSearch 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRead;
+        protected global::System.Web.UI.WebControls.TextBox navSearch;
+        
+        /// <summary>
+        /// btnSearch 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
     }
 }

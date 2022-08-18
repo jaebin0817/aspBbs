@@ -12,6 +12,16 @@ namespace WebApplication1
 {
     public partial class Main : System.Web.UI.Page
     {
+        public string BbsCat
+        {
+            get { return hfCat.Value; }
+        }
+
+        public string Cno
+        {
+            get { return hfCno.Value; }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             DataBind();

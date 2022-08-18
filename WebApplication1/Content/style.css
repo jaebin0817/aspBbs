@@ -255,6 +255,8 @@ body {
     overflow: hidden;
 }
 
+
+
 .posts-info {
     position: absolute;
     top: 135px;
@@ -303,7 +305,7 @@ body {
     background-color: #E4DCCF;
     position: relative;
     width: 90%;
-    min-height: 500px;
+    min-height: 650px;
     margin-top: 10px;
     margin: 10px 5% 0;
 }
@@ -412,15 +414,27 @@ btnReply {
     top: 100px;
     left: 10px;
     right: 10px;
-    height: 15px;
     font-size: 12px;
     padding: 5px;
-    min-height: 350px;
+    min-height: 500px;
+    overflow:hidden;
     border-top: solid 1px;
     border-bottom: solid 1px;
     word-wrap: break-word;
     word-break: break-word;
     white-space: pre-wrap;
+}
+
+#MainContent_lblImage {
+    position: absolute;
+    height: 50%;
+    margin-top:10px;
+    left:0;
+}
+
+#MainContent_lblImage img {
+    height: 100%;
+    margin:auto;
 }
 
 .post-mng {
@@ -546,6 +560,9 @@ btnReply {
 
 .r_content_td {
     padding-bottom: 5px;
+    word-wrap: break-word;
+    word-break: break-word;
+    
 }
 
 #msg-wrap {
@@ -561,5 +578,13 @@ a{
 
 .paging-tb{
     margin:auto;
+    text-align:center;
+}
+
+#MainContent_btnBack {
+    margin: auto;
+}
+
+#btn-back {
     text-align:center;
 }

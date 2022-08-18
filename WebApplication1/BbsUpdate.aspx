@@ -3,7 +3,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <div class="wrap">
         
-        <div class="page-title" id="page-title">게시글 작성</div>
+        <div class="page-title" id="page-title">게시글 수정</div>
           <table class="table write-form">
               <tr>
                   <th>작성자</th>
@@ -77,8 +77,8 @@
               <tr>
                   <th></th>
                    <th class="tb-btns">
-                       <asp:Button id="btnUpdate" runat="server" OnClick="BtnUpdate_Click" Text="수정"/>
-                       <asp:Button id="btnCancel" runat="server" OnClick="BtnCancel_Click" Text="취소"/>
+                       <asp:Button id="btnUpdate" runat="server"  OnClientClick="return bbsWriteCheck()" OnClick="BtnUpdate_Click" Text="수정"/>
+<%--                       <asp:Button id="btnCancel" runat="server" OnClick="BtnCancel_Click" Text="취소"/>--%>
                        <asp:Button id="btnRead" runat="server" Text="글보기" CausesValidation="false" />  
                    </th>
               </tr>
@@ -88,20 +88,9 @@
     </div>
 
     <script>
-       $("#MainContent_p_thumb").change(function () {
-            var filename = $("#MainContent_p_thumb").val();
-            //alert(filename);
-            if (filename != "") {
-                var ext = filename.slice(filename.lastIndexOf(".") + 1).toLowerCase();
-                var imgExt = ["jpg", "jpeg", "png", "gif"];
-
-                if (!(imgExt.includes(ext))) {
-                    alert("이미지 파일만 업로드 가능합니다");
-                    $("#MainContent_p_thumb").val("");
-                }
-            }
+        $("#MainContent_p_thumb").change(function () {
+            imgFileCheck();
         });
-
     </script>
 
  </asp:Content>

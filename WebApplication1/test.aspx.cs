@@ -9,6 +9,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net;
 using System.Net.Sockets;
+using System.IO;
+using System.Text;
 
 namespace WebApplication1
 {
@@ -43,6 +45,7 @@ namespace WebApplication1
             }
 
             Response.Write(localIP);
+            hf.Value = "히든필드";
 
         }
 
@@ -122,6 +125,14 @@ namespace WebApplication1
         {
             if (ConfigurationManager.ConnectionStrings[name] == null) return string.Empty;
             else return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+
+            
+        }
+
+        protected void Move_Click(object sender, EventArgs e)
+        {
+            
+            Response.Redirect("testAction.aspx");
         }
     }
 }

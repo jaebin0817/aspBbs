@@ -18,7 +18,7 @@
           <tr>
               <th>비밀번호</th>
               <td>
-                  <asp:TextBox id="p_pw" runat="server" TextMode="Password" MaxLength="20" CssClass="form-control"></asp:TextBox>
+                  <asp:TextBox id="p_pw" runat="server" TextMode="Password" MaxLength="10" CssClass="form-control"></asp:TextBox>
                   <asp:RequiredFieldValidator ID="rfvP_pw" runat="server" ErrorMessage="비밀번호를 입력해주세요" 
                       Display="Dynamic" ControlToValidate="p_pw" SetFocusOnError="true">
                   </asp:RequiredFieldValidator>

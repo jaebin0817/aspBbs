@@ -22,6 +22,12 @@ namespace WebApplication1
             string selectCatString = "SELECT c_name FROM bbs_cat WHERE c_no=";
             selectCatString += Request["c_no"];
             DataRow cat = dbConn.GetRow(selectCatString);
+            if (cat == null)
+            {
+                MessageBox.Show("잘못된 접근입니다");
+                Response.Redirect("BbsList.aspx");
+            }
+                
             lblP_cat.Text = cat["c_name"].ToString();
 
             if(Request["keyword"] == null)
@@ -46,6 +52,7 @@ namespace WebApplication1
             lblP_content.Text = row["p_content"].ToString();
             lblP_wname.Text = row["p_wname"].ToString();
             lblP_regdt.Text = row["p_regdt"].ToString();
+            lblImage.Text = "<img src='/Uploads/" + row["p_thumb"].ToString() + "'/>";
 
             //글 상세보기 눌렀을 때 조회수 증가
             PlusReadcnt(updateString);
@@ -53,8 +60,8 @@ namespace WebApplication1
             int readcnt = cnt + 1;
             lblP_readcnt.Text = readcnt.ToString();
 
-            lblDel.Text = "<a href='BbsPwcheck.aspx?mode=del&p_no=" + row["p_no"].ToString() + "'>삭제</a>";
-            lblMod.Text = "<a href='BbsPwcheck.aspx?mode=mod&p_no=" + row["p_no"].ToString() + "'>수정</a>";
+            lblDel.Text = "<a href='BbsPwcheck.aspx?mode=del&c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString() + "'>삭제</a>";
+            lblMod.Text = "<a href='BbsPwcheck.aspx?mode=mod&c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString() + "'>수정</a>";
 
             //댓글 로드
             dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE p_no=" + Request["p_no"] + " ORDER BY r_grpno DESC, r_grpord ASC ";

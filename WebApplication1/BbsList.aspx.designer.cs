@@ -22,6 +22,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.SqlDataSource dsrcProduct;
         
         /// <summary>
+        /// lblTitle 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+        
+        /// <summary>
         /// lblCount 컨트롤입니다.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,42 @@ namespace WebApplication1 {
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLast;
+        
+        /// <summary>
+        /// hfCat 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfCat;
+        
+        /// <summary>
+        /// hfCno 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfCno;
+        
+        /// <summary>
+        /// hfKeyword 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfKeyword;
+        
+        /// <summary>
+        /// hfNowPage 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfNowPage;
         
         /// <summary>
         /// navSearch 컨트롤입니다.

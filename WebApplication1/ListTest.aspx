@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#"  MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BbsList.aspx.cs" Inherits="WebApplication1.BbsList" %>
-
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListTest.aspx.cs" Inherits="WebApplication1.ListTest" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <div class="wrap">
@@ -9,7 +8,7 @@
 
         <div class="list-title" id="list-title"><asp:Label runat="server" ID="lblTitle"></asp:Label></div>
         <div class="list-write" id="list-write">
-            총 게시글 수 : <asp:Label ID="lblCount" runat="server" /> (page : <asp:Label ID="lblNowPage" runat="server" /> / <asp:Label ID="lblPage" runat="server" />) &nbsp;&nbsp;&nbsp;
+            ★테스트★ 총 게시글 수 : <asp:Label ID="lblCount" runat="server" /> (page : <asp:Label ID="lblNowPage" runat="server" /> / <asp:Label ID="lblPage" runat="server" />) &nbsp;&nbsp;&nbsp;
             <a href="BbsWrite.aspx">[ 글쓰기 ]</a>
         </div>
         <div class="posts-list" id="posts-list">
@@ -48,12 +47,9 @@
              </td>
             </tr>
           </table>
+            <asp:HiddenField ID="hfCat" runat="server" />
+            <asp:HiddenField ID="hfCno" runat="server" />
         </div>
-        <asp:HiddenField ID="hfCat" runat="server" />
-        <asp:HiddenField ID="hfCno" runat="server" />
-        <asp:HiddenField ID="hfKeyword" runat="server" />
-        <asp:HiddenField ID="hfNowPage" runat="server" />
-
 
         <div class="search-wrap">
               <asp:TextBox ID="navSearch" runat="server" CssClass="navsearch" placeholder="작성자, 제목, 내용"></asp:TextBox>              

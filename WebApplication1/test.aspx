@@ -8,7 +8,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" method="post">
         <div>
 
             <asp:Button id="catInsert" runat="server" OnClick="CatInsert_Click" Text="카테고리 추가" />
@@ -16,6 +16,8 @@
 
             <asp:Button ID="getIP" runat="server" OnClick="GetIP_Click" Text="IP얻기" />
 
+            <asp:HiddenField ID="hf" runat="server" />
+            <asp:Button ID="move" runat="server" OnClick="Move_Click" Text="이동" />
 
 
         </div>
