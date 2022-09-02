@@ -25,6 +25,10 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             DataBind();
+            Session["bbs_cat"] = null;
+            Session["c_no"] = null;
+            Session["keyword"] = null;
+            Session["nowPage"] = null;
         }
 
         public override void DataBind()
@@ -44,8 +48,8 @@ namespace WebApplication1
             string hP_no2 = hPost2["p_no"].ToString();
             string hC_no2 = hPost2["c_no"].ToString();
 
-            lblP_hot_thumb1.Text = "<a href='BbsRead.aspx?c_no="+ hC_no1 + "&p_no=" + hP_no1 + "'><img src='/uploads/" + hThumnfile1 + "' class='rec-thumb'/></a>";
-            lblP_hot_thumb2.Text = "<a href='BbsRead.aspx?c_no=" + hC_no2 + "&p_no=" + hP_no2 + "'><img src='/uploads/" + hThumnfile2 + "' class='rec-thumb'/></a>";
+            lblP_hot_thumb1.Text = "<a href='/Bbs/BbsRead.aspx?c_no=" + hC_no1 + "&p_no=" + hP_no1 + "'><img src='/uploads/" + hThumnfile1 + "' class='rec-thumb'/></a>";
+            lblP_hot_thumb2.Text = "<a href='/Bbs/BbsRead.aspx?c_no=" + hC_no2 + "&p_no=" + hP_no2 + "'><img src='/uploads/" + hThumnfile2 + "' class='rec-thumb'/></a>";
 
 
             DataTable nDt = GetNewPost();
@@ -63,8 +67,8 @@ namespace WebApplication1
             string nP_no2 = nPost2["p_no"].ToString();
             string nC_no2 = nPost2["c_no"].ToString();
 
-            lblP_new_thumb1.Text = "<a href='BbsRead.aspx?c_no=" + nC_no1 + "&p_no=" + nP_no1 + "'><img src='/uploads/" + nThumnfile1 + "' class='rec-thumb'/></a>";
-            lblP_new_thumb2.Text = "<a href='BbsRead.aspx?c_no=" + nC_no2 + "&p_no=" + nP_no2 + "'><img src='/uploads/" + nThumnfile2 + "' class='rec-thumb'/></a>";
+            lblP_new_thumb1.Text = "<a href='/Bbs/BbsRead.aspx?c_no=" + nC_no1 + "&p_no=" + nP_no1 + "'><img src='/uploads/" + nThumnfile1 + "' class='rec-thumb'/></a>";
+            lblP_new_thumb2.Text = "<a href='/Bbs/BbsRead.aspx?c_no=" + nC_no2 + "&p_no=" + nP_no2 + "'><img src='/uploads/" + nThumnfile2 + "' class='rec-thumb'/></a>";
 
         }
 
@@ -110,7 +114,7 @@ namespace WebApplication1
 
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/BbsList.aspx?keyword=" + navSearch.Text);
+            Response.Redirect("~/Bbs/BbsList.aspx?keyword=" + navSearch.Text);
         }
 
 

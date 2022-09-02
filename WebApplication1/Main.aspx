@@ -5,7 +5,7 @@
     <div class="wrap">
 
         <div class="col-1" id="intro">
-            <a href="BbsList.aspx" ><img id="mainimg" src="/images/main.png" /></a>            
+            <a href="/Bbs/BbsList.aspx" ><img id="mainimg" src="/images/main.png" /></a>            
         </div>
 
         <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">

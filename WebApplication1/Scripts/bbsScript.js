@@ -8,7 +8,7 @@ function bbsWriteCheck() {
     var pPwlen = $("#MainContent_p_pw").val().length;
     var pSublen = $("#MainContent_p_subject").val().length;
     var pContlen = $("#MainContent_p_content").val().length;
-
+    var loginStatus = $("#MainContent_loginStatus").val();
     //alert(pSublen);
 
     if (pNamelen < 2 || pNamelen > 10) {
@@ -17,7 +17,7 @@ function bbsWriteCheck() {
         return false;
     }
 
-    if (pPwlen < 4 || pPwlen > 10) {
+    if ((pPwlen < 4 || pPwlen > 10) && loginStatus == "N") {
         alert("비밀번호는 4글자 이상 10글자 이하로 입력해주세요");
         $("#MainContent_p_pw").focus();
         return false;

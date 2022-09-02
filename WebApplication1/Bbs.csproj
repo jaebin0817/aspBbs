@@ -120,16 +120,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <Content Include="BbsList.aspx" />
-    <Content Include="BbsMsg.aspx" />
-    <Content Include="BbsPwcheck.aspx" />
-    <Content Include="BbsRead.aspx" />
-    <Content Include="BbsReply.aspx" />
-    <Content Include="BbsReplyMod.aspx" />
-    <Content Include="BbsSearch.aspx" />
-    <Content Include="BbsUpdate.aspx" />
-    <Content Include="BbsWrite.aspx" />
-    <Content Include="BbsWriteTest.aspx" />
+    <Content Include="Bbs\BbsList.aspx" />
+    <Content Include="Bbs\BbsMsg.aspx" />
+    <Content Include="Bbs\BbsPwcheck.aspx" />
+    <Content Include="Bbs\BbsRead.aspx" />
+    <Content Include="Bbs\BbsReply.aspx" />
+    <Content Include="Bbs\BbsReplyMod.aspx" />
+    <Content Include="Bbs\BbsUpdate.aspx" />
+    <Content Include="Bbs\BbsWrite.aspx" />
+    <Content Include="error\Error.aspx" />
+    <Content Include="Member\IdCheck.aspx" />
+    <Content Include="Member\IdPwFind.aspx" />
+    <Content Include="Member\IdPwFindResult.aspx" />
+    <Content Include="Member\MemJoin.aspx" />
+    <Content Include="Member\MemLog.aspx" />
+    <Content Include="Member\MemMypage.aspx" />
+    <Content Include="Member\MemJoinForm.aspx" />
+    <Content Include="Member\PwCheck.aspx" />
+    <Content Include="Scripts\memberScript.js" />
+    <Content Include="TEST\TestJoin.aspx" />
+    <Content Include="TEST\TestPwcheck.aspx" />
+    <Content Include="TEST\TestWrite.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -149,13 +160,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ListTest.aspx" />
+    <Content Include="TEST\TestList.aspx" />
     <Content Include="MoreContents.aspx" />
     <Content Include="Scripts\bbsReplyScript.js" />
     <Content Include="Scripts\bbsScript.js" />
     <Content Include="SqlDataSourceTest.aspx" />
-    <Content Include="test.aspx" />
-    <Content Include="testAction.aspx" />
+    <Content Include="TEST\test.aspx" />
+    <Content Include="TEST\testAction.aspx" />
+    <Content Include="TEST\TestRead.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Main.aspx" />
@@ -189,7 +201,9 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
@@ -203,75 +217,146 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BbsList.aspx.cs">
+    <Compile Include="Bbs\BbsList.aspx.cs">
       <DependentUpon>BbsList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsList.aspx.designer.cs">
+    <Compile Include="Bbs\BbsList.aspx.designer.cs">
       <DependentUpon>BbsList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsMsg.aspx.cs">
+    <Compile Include="Bbs\BbsMsg.aspx.cs">
       <DependentUpon>BbsMsg.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsMsg.aspx.designer.cs">
+    <Compile Include="Bbs\BbsMsg.aspx.designer.cs">
       <DependentUpon>BbsMsg.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsPwcheck.aspx.cs">
+    <Compile Include="Bbs\BbsPwcheck.aspx.cs">
       <DependentUpon>BbsPwcheck.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsPwcheck.aspx.designer.cs">
+    <Compile Include="Bbs\BbsPwcheck.aspx.designer.cs">
       <DependentUpon>BbsPwcheck.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsRead.aspx.cs">
+    <Compile Include="Bbs\BbsRead.aspx.cs">
       <DependentUpon>BbsRead.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsRead.aspx.designer.cs">
+    <Compile Include="Bbs\BbsRead.aspx.designer.cs">
       <DependentUpon>BbsRead.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsReply.aspx.cs">
+    <Compile Include="Bbs\BbsReply.aspx.cs">
       <DependentUpon>BbsReply.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsReply.aspx.designer.cs">
+    <Compile Include="Bbs\BbsReply.aspx.designer.cs">
       <DependentUpon>BbsReply.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsReplyMod.aspx.cs">
+    <Compile Include="Bbs\BbsReplyMod.aspx.cs">
       <DependentUpon>BbsReplyMod.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsReplyMod.aspx.designer.cs">
+    <Compile Include="Bbs\BbsReplyMod.aspx.designer.cs">
       <DependentUpon>BbsReplyMod.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsSearch.aspx.cs">
-      <DependentUpon>BbsSearch.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="BbsSearch.aspx.designer.cs">
-      <DependentUpon>BbsSearch.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="BbsUpdate.aspx.cs">
+    <Compile Include="Bbs\BbsUpdate.aspx.cs">
       <DependentUpon>BbsUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsUpdate.aspx.designer.cs">
+    <Compile Include="Bbs\BbsUpdate.aspx.designer.cs">
       <DependentUpon>BbsUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsWrite.aspx.cs">
+    <Compile Include="Bbs\BbsWrite.aspx.cs">
       <DependentUpon>BbsWrite.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsWrite.aspx.designer.cs">
+    <Compile Include="Bbs\BbsWrite.aspx.designer.cs">
       <DependentUpon>BbsWrite.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BbsWriteTest.aspx.cs">
-      <DependentUpon>BbsWriteTest.aspx</DependentUpon>
+    <Compile Include="Member.cs" />
+    <Compile Include="error\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BbsWriteTest.aspx.designer.cs">
-      <DependentUpon>BbsWriteTest.aspx</DependentUpon>
+    <Compile Include="error\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\IdCheck.aspx.cs">
+      <DependentUpon>IdCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\IdCheck.aspx.designer.cs">
+      <DependentUpon>IdCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\IdPwFind.aspx.cs">
+      <DependentUpon>IdPwFind.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\IdPwFind.aspx.designer.cs">
+      <DependentUpon>IdPwFind.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\IdPwFindResult.aspx.cs">
+      <DependentUpon>IdPwFindResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\IdPwFindResult.aspx.designer.cs">
+      <DependentUpon>IdPwFindResult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MemJoin.aspx.cs">
+      <DependentUpon>MemJoin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\MemJoin.aspx.designer.cs">
+      <DependentUpon>MemJoin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MemLog.aspx.cs">
+      <DependentUpon>MemLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\MemLog.aspx.designer.cs">
+      <DependentUpon>MemLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MemMypage.aspx.cs">
+      <DependentUpon>MemMypage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\MemMypage.aspx.designer.cs">
+      <DependentUpon>MemMypage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\MemJoinForm.aspx.cs">
+      <DependentUpon>MemJoinForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\MemJoinForm.aspx.designer.cs">
+      <DependentUpon>MemJoinForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Member\PwCheck.aspx.cs">
+      <DependentUpon>PwCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Member\PwCheck.aspx.designer.cs">
+      <DependentUpon>PwCheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TEST\TestJoin.aspx.cs">
+      <DependentUpon>TestJoin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST\TestJoin.aspx.designer.cs">
+      <DependentUpon>TestJoin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TEST\TestPwcheck.aspx.cs">
+      <DependentUpon>TestPwcheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST\TestPwcheck.aspx.designer.cs">
+      <DependentUpon>TestPwcheck.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TEST\TestWrite.aspx.cs">
+      <DependentUpon>TestWrite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST\TestWrite.aspx.designer.cs">
+      <DependentUpon>TestWrite.aspx</DependentUpon>
     </Compile>
     <Compile Include="FileUpload.cs" />
     <Compile Include="DBConn.cs" />
@@ -292,12 +377,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ListTest.aspx.cs">
-      <DependentUpon>ListTest.aspx</DependentUpon>
+    <Compile Include="TEST\TestList.aspx.cs">
+      <DependentUpon>TestList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ListTest.aspx.designer.cs">
-      <DependentUpon>ListTest.aspx</DependentUpon>
+    <Compile Include="TEST\TestList.aspx.designer.cs">
+      <DependentUpon>TestList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
@@ -336,19 +421,26 @@
     <Compile Include="SqlDataSourceTest.aspx.designer.cs">
       <DependentUpon>SqlDataSourceTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="test.aspx.cs">
+    <Compile Include="TEST\test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="test.aspx.designer.cs">
+    <Compile Include="TEST\test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
-    <Compile Include="testAction.aspx.cs">
+    <Compile Include="TEST\testAction.aspx.cs">
       <DependentUpon>testAction.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="testAction.aspx.designer.cs">
+    <Compile Include="TEST\testAction.aspx.designer.cs">
       <DependentUpon>testAction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TEST\TestRead.aspx.cs">
+      <DependentUpon>TestRead.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TEST\TestRead.aspx.designer.cs">
+      <DependentUpon>TestRead.aspx</DependentUpon>
     </Compile>
     <Compile Include="ValuesController1.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">

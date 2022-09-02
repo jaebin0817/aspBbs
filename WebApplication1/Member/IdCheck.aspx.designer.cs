@@ -7,90 +7,72 @@
 // </자동 생성됨>
 //------------------------------------------------------------------------------
 
-namespace WebApplication1 {
+namespace WebApplication1.Member {
     
     
-    public partial class SiteMaster {
+    public partial class IdCheck {
         
         /// <summary>
-        /// ScriptManager 컨트롤입니다.
+        /// lblNotice 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
+        protected global::System.Web.UI.WebControls.Label lblNotice;
         
         /// <summary>
-        /// linkCat1 컨트롤입니다.
+        /// m_id 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkCat1;
+        protected global::System.Web.UI.WebControls.TextBox m_id;
         
         /// <summary>
-        /// linkCat2 컨트롤입니다.
+        /// m_id_chk_msg 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkCat2;
+        protected global::System.Web.UI.WebControls.Label m_id_chk_msg;
         
         /// <summary>
-        /// linkAll 컨트롤입니다.
+        /// checked_id 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkAll;
+        protected global::System.Web.UI.WebControls.HiddenField checked_id;
         
         /// <summary>
-        /// hlMypage 컨트롤입니다.
+        /// BtnIDChk 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlMypage;
+        protected global::System.Web.UI.WebControls.Button BtnIDChk;
         
         /// <summary>
-        /// hlLogout 컨트롤입니다.
+        /// BtnRetry 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton hlLogout;
+        protected global::System.Web.UI.WebControls.Button BtnRetry;
         
         /// <summary>
-        /// hlSignon 컨트롤입니다.
+        /// BtnIDUse 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlSignon;
-        
-        /// <summary>
-        /// hlLogin 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlLogin;
-        
-        /// <summary>
-        /// MainContent 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Button BtnIDUse;
     }
 }

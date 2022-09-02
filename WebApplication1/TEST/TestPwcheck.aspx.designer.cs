@@ -10,87 +10,69 @@
 namespace WebApplication1 {
     
     
-    public partial class SiteMaster {
+    public partial class TestPwcheck {
         
         /// <summary>
-        /// ScriptManager 컨트롤입니다.
+        /// lblModeInfo 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
+        protected global::System.Web.UI.WebControls.Label lblModeInfo;
         
         /// <summary>
-        /// linkCat1 컨트롤입니다.
+        /// typed_pw 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkCat1;
+        protected global::System.Web.UI.WebControls.TextBox typed_pw;
         
         /// <summary>
-        /// linkCat2 컨트롤입니다.
+        /// btnCheck 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkCat2;
+        protected global::System.Web.UI.WebControls.Button btnCheck;
         
         /// <summary>
-        /// linkAll 컨트롤입니다.
+        /// rfvP_pw 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkAll;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_pw;
         
         /// <summary>
-        /// hlMypage 컨트롤입니다.
+        /// revP_pw 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlMypage;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revP_pw;
         
         /// <summary>
-        /// hlLogout 컨트롤입니다.
+        /// lblAlert 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton hlLogout;
+        protected global::System.Web.UI.WebControls.Label lblAlert;
         
         /// <summary>
-        /// hlSignon 컨트롤입니다.
+        /// hyperBack 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlSignon;
-        
-        /// <summary>
-        /// hlLogin 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlLogin;
-        
-        /// <summary>
-        /// MainContent 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.HyperLink hyperBack;
     }
 }

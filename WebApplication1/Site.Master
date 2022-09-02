@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>게시판 개발</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -19,9 +19,14 @@
     <link rel="stylesheet" href="/Content/bootstrap-theme.css"/> 
     <link rel="stylesheet" href="/Content/style.css"/>
     <script src="/Scripts/bbsScript.js"></script>
+    <script src="/Scripts/memberScript.js"></script>
     <script src="/Scripts/bbsReplyScript.js"></script>
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
-    <script>history.pushState({}, null, location.pathname);</script>
+    <script src="/Scripts/moment-with-locales.js"></script>
+    <script>
+        //history.pushState({}, null, location.pathname);
+        history.replaceState({}, null, location.pathname);
+    </script>
 
 </head>
 <body>
@@ -52,22 +57,28 @@
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                <img src="/Images/more.png" alt="MENU" />
            </button>
-	       <a href="Main.aspx">
+	       <a href="/Main.aspx">
 	          <img src="/Images/home.png" alt="HOME" />
 	       </a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-left">
-<%--            	<li><asp:HyperLink ID="hyperAll" NavigateUrl="ListTest.aspx" OnUnload="HyperAll_Unload" runat="server">전체글</asp:HyperLink></li>
-            	<li><asp:LinkButton ID="linkCat1" OnClick="LinkCat1_Click" runat="server">카테고리1</asp:LinkButton></li>--%>
-
-                <li><a href="BbsList.aspx">전체글</a></li>
-	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리1&c_no=1">카테고리1</a></li>
-	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리2&c_no=2">카테고리2</a></li>
-	      	    <li><a href="BbsList.aspx?bbs_cat=카테고리3&c_no=3">카테고리3</a></li>
-              	<li><a href="BbsList.aspx?bbs_cat=카테고리4&c_no=4">카테고리4</a></li>
-          </ul>        
-        </div>
+                <li><a href="/Bbs/BbsList.aspx">전체글</a></li>
+	      	    <li><a href="/Bbs/BbsList.aspx?bbs_cat=카테고리1&c_no=1">카테고리1</a></li>
+	      	    <li><a href="/Bbs/BbsList.aspx?bbs_cat=카테고리2&c_no=2">카테고리2</a></li>
+	      	    <li><a href="/Bbs/BbsList.aspx?bbs_cat=카테고리3&c_no=3">카테고리3</a></li>
+              	<li><a href="/Bbs/BbsList.aspx?bbs_cat=카테고리4&c_no=4">카테고리4</a></li>
+                <li><asp:LinkButton Visible="false" ID="linkCat1" OnClick="LinkCat1_Click" runat="server">카테고리1test</asp:LinkButton></li>
+                <li><asp:LinkButton Visible="false" ID="linkCat2" OnClick="LinkCat2_Click" runat="server">카테고리2test</asp:LinkButton></li>
+                <li><asp:LinkButton Visible="false" ID="linkAll" OnClick="LinkAll_Click" runat="server">전체글test</asp:LinkButton></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+             <li><asp:HyperLink runat="server" ID="hlMypage" NavigateUrl="/Member/MemMypage.aspx">마이페이지</asp:HyperLink></li>
+             <li><asp:LinkButton runat="server" ID="hlLogout" OnClick="HlLogout_Click">로그아웃</asp:LinkButton></li>
+             <li><asp:HyperLink runat="server" ID="hlSignon" NavigateUrl="/Member/MemJoin.aspx">회원가입</asp:HyperLink></li>
+             <li><asp:HyperLink runat="server" ID="hlLogin" NavigateUrl="/Member/MemLog.aspx">로그인</asp:HyperLink></li>
+          </ul>               
+        </div>     
       </div>
     </nav>
 
