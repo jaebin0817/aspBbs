@@ -9,25 +9,50 @@ namespace WebApplication1
 
         DBConn dbConn = new DBConn();
 
+        protected string r_member = "";
+        protected string p_member = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["s_m_id"] != null)
+            r_member = Request["r_member"];
+            p_member = Request["p_member"];
+
+            if (Request["mode"] == "r_re")
             {
-                r_wname.Visible = false;
-                r_pw.Visible = false;
+                lblTitle.Text = "답글 작성";
+                btnReply.Visible = true;
+                btnReplyMod.Visible = false;
+                if (Session["s_m_id"] != null)
+                {
+                    r_wname.Visible = false;
+                    r_pw.Visible = false;
+                    lblText.Visible = true;
+                }
+            }
+            else if (Request["mode"] == "r_mod")
+            {
+                lblTitle.Text = "댓글 수정";
+                btnReply.Visible = false;
+                btnReplyMod.Visible = true;
+                if (r_member == "Y")
+                {
+                    r_wname.Visible = false;
+                    r_pw.Visible = false;
+                }
+
+                if (!IsPostBack)
+                {
+                    string selectString = "SELECT r_wname, r_content FROM bbs_reply WHERE r_no=" + Request["r_no"];
+                    DataTable dt = dbConn.GetData(selectString);
+                    DataRow row = dt.Rows[0];
+
+                    r_wname.Text = row["r_wname"].ToString();
+                    r_content.Text = row["r_content"].ToString();
+                }
+
             }
 
-            dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE r_no=" + Request["r_no"];
 
-            rptProduct.DataSource = dsrcProduct;
-            rptProduct.DataBind();
-
-            string selectString = "SELECT A.p_no, B.c_no  FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE A.r_no=" + Request["r_no"];
-            DataRow row = dbConn.GetRow(selectString);
-            string p_no = row["p_no"].ToString();
-            string c_no = row["c_no"].ToString();
-
-            hyperBack.NavigateUrl = "/Bbs/BbsRead.aspx?c_no=" + c_no + "&p_no=" + p_no;
 
         }
 
@@ -95,11 +120,67 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
+                string openerUrl = "/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString();
+
+                Response.Write("<script> opener.location.href='"+ openerUrl + "'; window.close(); </script>");
+                //Response.Redirect("/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
 
             }
         }
 
+
+        protected void BtnReplyMod_Click(object sender, EventArgs e)
+        {
+            string strConn = dbConn.GetConnectionString();
+
+            using (SqlConnection conn = new SqlConnection(strConn))
+            {
+                string selectString = "SELECT A.p_no, B.c_no FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE r_no=" + Request["r_no"];
+                DataRow row = dbConn.GetRow(selectString);
+
+                string updateString = "UPDATE bbs_reply SET r_wname=@r_wname, r_pw=@r_pw, r_content=@r_content, r_wip=@r_wip WHERE r_no=" + Request["r_no"];
+
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.Parameters.AddWithValue("@r_content", r_content.Text);              
+                cmd.Parameters.AddWithValue("@r_wip", dbConn.GetIP());
+
+                if(r_member=="Y")
+                {
+                    cmd.Parameters.AddWithValue("@r_wname", Session["s_m_id"]);
+                    cmd.Parameters.AddWithValue("@r_pw", Session["s_m_pw"]);
+                }
+                else if(r_member=="N")
+                {
+                    cmd.Parameters.AddWithValue("@r_wname", r_wname.Text);
+                    cmd.Parameters.AddWithValue("@r_pw", r_pw.Text);
+                }
+
+                cmd.Connection = conn;
+
+                try
+                {
+                    cmd.CommandText = updateString;
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch (Exception error)
+                {
+                    Response.Write(error.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                string openerUrl = "/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString();
+                Response.Write("<script> opener.location.href='" + openerUrl + "'; window.close(); </script>");
+
+                //Response.Redirect("/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
+
+            }
+        }
 
 
 

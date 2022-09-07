@@ -356,13 +356,17 @@ body {
     height: 70px;
 }
 
+.new_win_con .reply-cont {
+    width: 100%;
+}
+
 .reply-btn {
     position: absolute;
     bottom: 5px;
     right: 5px;
     width: 20%;
     height: 70px;
-    padding-left:3%;
+    padding-left: 3%;
 }
 
 btnReply {
@@ -1331,5 +1335,5 @@ lblNotice{
 }
 
 .btn-login .btn-link:hover {
-    background: #dadae0;
+    background: #f0ebe3;
 }

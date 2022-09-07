@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
 
 namespace WebApplication1
 {
@@ -22,6 +21,8 @@ namespace WebApplication1
         public string p_regdt { get; set; }
         public int p_readcnt { get; set; }
         public string p_open { get; set; }
+        public string p_member { get; set; }
+
     }
 
     public class Paging

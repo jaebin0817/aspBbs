@@ -32,11 +32,7 @@ namespace WebApplication1.Member
                 Session["s_m_pw"] = t_m_pw;
                 Session["s_m_level"] = m_level;
 
-                DialogResult dr = MessageBox.Show("로그인 성공\n확인을 누르면 마이페이지로 이동합니다.", "", MessageBoxButtons.OK);
-                if (dr == DialogResult.OK)
-                {
-                    Response.Redirect("/Member/MemMypage.aspx");
-                }
+                Response.Redirect("/Member/MemMypage.aspx");
 
             }                
             else

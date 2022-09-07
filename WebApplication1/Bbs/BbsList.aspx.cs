@@ -1,12 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Configuration;
-using Dapper;
-using System.Data;
-using System.Windows.Forms;
 
 namespace WebApplication1
 {
@@ -27,13 +20,20 @@ namespace WebApplication1
             Int32.TryParse(nowPage, out int nPage);
             Double.TryParse(nowPage, out double nPageDo);
 
+            //string selectCatString = "SELECT c_name FROM bbs_cat
+
+
             string bbs_cat = Request["bbs_cat"];
             string c_no = Request["c_no"];
             string keyword = Request["keyword"];
 
+            string writeLink = "BbsWrite.aspx";
+        
+
             if (bbs_cat != null)
             {
                 lblTitle.Text = bbs_cat + " 게시글 목록";
+                writeLink += "?bbs_cat=" + bbs_cat + "&c_no=" + c_no;
             }
             else if (keyword != null)
             {
@@ -43,6 +43,8 @@ namespace WebApplication1
             {
                 lblTitle.Text = "전체 게시글 목록";
             }
+
+            HlWrite.NavigateUrl = writeLink;
 
             List<BbsPost> results = pg.PostList(nPage, c_no, keyword);
             rptProduct.DataSource = results;

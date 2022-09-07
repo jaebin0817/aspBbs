@@ -35,11 +35,8 @@ namespace WebApplication1.Member
             Session["s_m_pw"] = null;
             Session["s_m_level"] = null;
 
-            DialogResult dr = MessageBox.Show("로그아웃 성공\n확인을 누르면 홈으로 이동합니다.", "", MessageBoxButtons.OK);
-            if (dr == DialogResult.OK)
-            {
-                Response.Redirect("/Main.aspx");
-            }
+            Response.Redirect("/Main.aspx");
+
         }
 
 

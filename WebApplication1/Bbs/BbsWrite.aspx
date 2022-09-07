@@ -30,6 +30,7 @@
                   <th>카테고리</th>
                   <td>
                       <asp:DropDownList id="c_no" runat="server" CssClass="form-control">
+                          <asp:ListItem value="">카테고리선택</asp:ListItem>
                           <asp:ListItem value="1">카테고리1</asp:ListItem>
                           <asp:ListItem value="2">카테고리2</asp:ListItem>
                           <asp:ListItem value="3">카테고리3</asp:ListItem>

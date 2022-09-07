@@ -13,7 +13,7 @@
                 <br /><br />
                 <asp:Button runat="server" ID="BtnWdraw" CssClass="btn-submit" OnClientClick="WdrawCheck()" Text="회원탈퇴" />
                 <br /><br />
-                <asp:Button runat="server" ID="BtnLogout" CssClass="btn-submit" OnClick="BtnLogout_Click" Text="로그아웃" />
+                <asp:Button runat="server" ID="BtnLogout" CssClass="btn-submit" OnClientClick="return LogoutMsg()" OnClick="BtnLogout_Click" Text="로그아웃" />
             </div>
         </div>
 

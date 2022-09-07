@@ -125,7 +125,7 @@
     <Content Include="Bbs\BbsPwcheck.aspx" />
     <Content Include="Bbs\BbsRead.aspx" />
     <Content Include="Bbs\BbsReply.aspx" />
-    <Content Include="Bbs\BbsReplyMod.aspx" />
+    <Content Include="TEST\BbsReplyMod.aspx" />
     <Content Include="Bbs\BbsUpdate.aspx" />
     <Content Include="Bbs\BbsWrite.aspx" />
     <Content Include="error\Error.aspx" />
@@ -252,11 +252,11 @@
     <Compile Include="Bbs\BbsReply.aspx.designer.cs">
       <DependentUpon>BbsReply.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bbs\BbsReplyMod.aspx.cs">
+    <Compile Include="TEST\BbsReplyMod.aspx.cs">
       <DependentUpon>BbsReplyMod.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bbs\BbsReplyMod.aspx.designer.cs">
+    <Compile Include="TEST\BbsReplyMod.aspx.designer.cs">
       <DependentUpon>BbsReplyMod.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bbs\BbsUpdate.aspx.cs">

@@ -2,19 +2,20 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <div class="wrap">
-        
+        <asp:HiddenField runat="server" ID="memStatus" />
+        <asp:HiddenField runat="server" ID="loginStatus" />
         <div class="page-title" id="page-title">게시글 수정</div>
           <table class="table write-form">
-              <tr>
+              <tr id="NonMember1">
                   <th>작성자</th>
                   <td>
-                      <asp:TextBox id="p_wname" runat="server" MaxLength="20" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox id="p_wname" runat="server" MaxLength="10" CssClass="form-control"></asp:TextBox>
                       <asp:RequiredFieldValidator ID="rfvP_wname" runat="server" ErrorMessage="작성자를 입력해주세요" 
                           Display="Dynamic" ControlToValidate="p_wname" SetFocusOnError="true">
                       </asp:RequiredFieldValidator>
                   </td>
               </tr>
-              <tr>
+              <tr id="NonMember2">
                   <th>비밀번호</th>
                   <td>
                       <asp:TextBox id="p_pw" runat="server" TextMode="Password" MaxLength="10" CssClass="form-control"></asp:TextBox>
@@ -30,6 +31,7 @@
                   <th>카테고리</th>
                   <td>
                       <asp:DropDownList id="c_no" runat="server" CssClass="form-control">
+                          <asp:ListItem value="">카테고리선택</asp:ListItem>
                           <asp:ListItem value="1">카테고리1</asp:ListItem>
                           <asp:ListItem value="2">카테고리2</asp:ListItem>
                           <asp:ListItem value="3">카테고리3</asp:ListItem>
@@ -88,6 +90,16 @@
     </div>
 
     <script>
+
+        $(document).ready(function () {
+            var loginStatus = $("#MainContent_loginStatus").val();
+            var memStatus = $("#MainContent_memStatus").val();
+            if (loginStatus == "Y" && memStatus == "Y") {
+                $("#NonMember1").css("display", "none");
+                $("#NonMember2").css("display", "none");
+            }
+        });
+
         $("#MainContent_p_thumb").change(function () {
             imgFileCheck();
         });

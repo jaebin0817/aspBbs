@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.Security;
-using System.Net;
-using System.Net.Sockets;
+
 
 namespace WebApplication1
 {
@@ -19,6 +10,12 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string bbs_cat = Request["bbs_cat"];
+            string r_c_no = Request["c_no"];
+
+            if (bbs_cat != null)
+                c_no.SelectedValue = r_c_no;
+
             if (Session["s_m_id"] != null)
             {
                 loginStatus.Value = "Y";
@@ -40,7 +37,11 @@ namespace WebApplication1
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.Parameters.AddWithValue("@c_no", c_no.Text);
+                if (!(c_no.Text.Equals("")))
+                    cmd.Parameters.AddWithValue("@c_no", c_no.Text);
+                else
+                    cmd.Parameters.AddWithValue("@c_no", DBNull.Value);
+                
                 cmd.Parameters.AddWithValue("@p_subject", p_subject.Text);
                 cmd.Parameters.AddWithValue("@p_content", p_content.Text);
                 cmd.Parameters.AddWithValue("@p_wname", p_wname.Text);

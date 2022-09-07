@@ -55,7 +55,7 @@ namespace WebApplication1.Member
             m_id.Visible = true;
             BtnRetry.Visible = false;
             m_id_chk_msg.Text = "";
-            lblNotice.Text = "<p>사용하실 아이디를 입력해 주세요.</p>";
+            lblNotice.Text = "<p>사용할 아이디를 입력해 주세요.</p>";
         }
 
         protected void BtnConf_Click(object sender, EventArgs e)

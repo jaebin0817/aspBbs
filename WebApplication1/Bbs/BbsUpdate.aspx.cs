@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.IO;
 using System.Windows.Forms;
 
@@ -19,6 +13,13 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["s_m_id"] != null)
+                loginStatus.Value = "Y";
+            else
+                loginStatus.Value = "N";
+
+            memStatus.Value = Request["p_member"].ToString();
+
             if (!IsPostBack)
             {
                 string selectString = "SELECT * FROM bbs_POST ";
@@ -28,12 +29,12 @@ namespace WebApplication1
                 if (dt == null)
                 {
                     MessageBox.Show("잘못된 접근입니다");
-                    Response.Redirect("BbsList.aspx");
+                    Response.Redirect("/Main.aspx");
                 }
                     
                 DataRow row = dt.Rows[0];
 
-                btnRead.PostBackUrl = "~/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + Request["p_no"];
+                btnRead.PostBackUrl = "/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + Request["p_no"];
 
                 p_wname.Text = row["p_wname"].ToString();
                 p_subject.Text = row["p_subject"].ToString();
@@ -81,12 +82,19 @@ namespace WebApplication1
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
 
-                cmd.Parameters.AddWithValue("@c_no", c_no.Text);
+                if (!(c_no.Text.Equals("")))
+                    cmd.Parameters.AddWithValue("@c_no", c_no.Text);
+                else
+                    cmd.Parameters.AddWithValue("@c_no", DBNull.Value);
+
                 cmd.Parameters.AddWithValue("@p_subject", p_subject.Text);
                 cmd.Parameters.AddWithValue("@p_content", p_content.Text);
                 cmd.Parameters.AddWithValue("@p_wname", p_wname.Text);
                 cmd.Parameters.AddWithValue("@p_wip", dbConn.GetIP());
-                cmd.Parameters.AddWithValue("@p_pw", p_pw.Text);
+                if (loginStatus.Value == "Y")
+                    cmd.Parameters.AddWithValue("@p_pw", Session["s_m_pw"]);
+                else
+                    cmd.Parameters.AddWithValue("@p_pw", p_pw.Text);
 
                 if (p_thumb.HasFile)
                 {
@@ -156,4 +164,4 @@ namespace WebApplication1
 
 
     }
-}
+}   

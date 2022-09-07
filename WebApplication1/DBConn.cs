@@ -43,9 +43,12 @@ public class DBConn
         {
             DataRow row = null;
             DataTable dt = GetData(selectString);
-                    
-            if (dt != null) { row = dt.Rows[0]; }            
-            return row;
+
+            if(dt !=null)
+                if (dt.Rows.Count > 0)
+                    row = dt.Rows[0];
+
+        return row;
 
         }
 

@@ -5,11 +5,8 @@
 
         <div id="msg-wrap">
             <asp:Label runat="server" ID="lblMsg" Font-Bold="true"></asp:Label>
-            <a href="Main.aspx"><h3><strong>홈으로 이동</strong></h3></a>
+            <a href="/Main.aspx"><h3><strong>홈으로 이동</strong></h3></a>
         </div>
 
     </div>
-    <script>
-        history.replaceState({}, null, location.pathname);
-    </script>
 </asp:Content>

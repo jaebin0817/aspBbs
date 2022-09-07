@@ -7,7 +7,7 @@
 
             <tr>
                 <td id="mode-info" colspan="3">
-                    <asp:Label runat="server" ID="lblModeInfo"></asp:Label>위해 글 작성시 입력했던 비밀번호를 입력해주세요
+                    <asp:Label runat="server" ID="lblModeInfo"></asp:Label><asp:Label runat="server" ID="lblModeInfo2">위해 글 작성시 입력했던 비밀번호를 입력해주세요</asp:Label>
                 </td>
             </tr>
 

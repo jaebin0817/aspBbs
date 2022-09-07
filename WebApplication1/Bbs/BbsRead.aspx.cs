@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace WebApplication1
@@ -19,24 +13,27 @@ namespace WebApplication1
         {
             
             //카테고리명 조회
-            string selectCatString = "SELECT c_name FROM bbs_cat WHERE c_no=";
-            selectCatString += Request["c_no"];
+            string selectCatString = "SELECT c_name FROM bbs_cat A JOIN bbs_post B ON A.c_no=B.c_no WHERE p_no=";
+            selectCatString += Request["p_no"];
             DataRow cat = dbConn.GetRow(selectCatString);
             if (cat == null)
             {
-                MessageBox.Show("잘못된 접근입니다");
-                Response.Redirect("/Bbs/BbsList.aspx");
+                lblP_cat.Text = "카테고리 없음";
+            }
+            else
+            {
+                lblP_cat.Text = cat["c_name"].ToString();
             }
                 
-            lblP_cat.Text = cat["c_name"].ToString();
+            
 
             String backUrl = "~/Bbs/BbsList.aspx?";
 
-            if (Request["keyword"] == null)
+            if (Request["keyword"] == null && (Request["c_no"] != null && Request["c_no"] != "0" && cat != null))
             {
                 backUrl += "bbs_cat=" + cat["c_name"].ToString() + "&c_no=" + Request["c_no"];               
             }
-            else
+            else if(Request["keyword"] != null)
             {
                 btnList.PostBackUrl = "keyword=" + Request["keyword"];
             }
@@ -69,8 +66,8 @@ namespace WebApplication1
             int readcnt = cnt + 1;
             lblP_readcnt.Text = readcnt.ToString();
 
-            lblDel.Text = "<a href='/Bbs/BbsPwcheck.aspx?mode=del&c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString() + "'>삭제</a>";
-            lblMod.Text = "<a href='/Bbs/BbsPwcheck.aspx?mode=mod&c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString() + "'>수정</a>";
+            lblDel.Text = "<a href='/Bbs/BbsPwcheck.aspx?mode=del&p_member="+ row["p_member"].ToString() + "&c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString() + "'>삭제</a>";
+            lblMod.Text = "<a href='/Bbs/BbsPwcheck.aspx?mode=mod&p_member=" + row["p_member"].ToString() + "&c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString() + "'>수정</a>";
 
             //댓글 로드
             dsrcProduct.SelectCommand = "SELECT * FROM bbs_reply WHERE p_no=" + Request["p_no"] + " ORDER BY r_grpno DESC, r_grpord ASC ";
@@ -83,6 +80,7 @@ namespace WebApplication1
             {
                 r_wname.Visible = false;
                 r_pw.Visible = false;
+                //lblText.Visible = true;
             }
             
 

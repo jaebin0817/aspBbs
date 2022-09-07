@@ -63,7 +63,7 @@ namespace WebApplication1
                     conn.Close();
                 }
 
-                Response.Redirect("~/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
+                Response.Redirect("/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
 
             }
         }
@@ -72,7 +72,7 @@ namespace WebApplication1
         {
             string selectString = "SELECT A.p_no, B.c_no FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE r_no=" + Request["r_no"];
             DataRow row = dbConn.GetRow(selectString);
-            Response.Redirect("~/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
+            Response.Redirect("/Bbs/BbsRead.aspx?c_no=" + row["c_no"].ToString() + "&p_no=" + row["p_no"].ToString());
 
         }
     }

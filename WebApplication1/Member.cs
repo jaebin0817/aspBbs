@@ -120,7 +120,7 @@ public class MemberDAO
         string result = null;
         SqlCommand cmd = new SqlCommand();
 
-        cmd.CommandText = "SELECT m_id FROM member WHERE m_name=@m_name AND m_email=@m_email";
+        cmd.CommandText = "SELECT m_id FROM member WHERE m_name=@m_name AND m_email=@m_email AND m_level!='F'";
         cmd.Parameters.AddWithValue("@m_name", m_name);
         cmd.Parameters.AddWithValue("@m_email", m_email);
 

@@ -35,11 +35,11 @@
                                     <%# ShowReplyIcon((int)Eval("r_indent"))%>
                                     <strong><%# Eval("r_wname") %></strong>&nbsp;&nbsp;
                                     <span id="r_redgt_td"><%# Eval("r_regdt").ToString() !="1900-01-01 오전 12:00:00" ? Eval("r_regdt") : "" %>&nbsp;&nbsp;</span>
-                                    <a href="/Bbs/BbsPwcheck.aspx?mode=r_mod&r_no=<%# Eval("r_no") %>">
+                                    <a href="/Bbs/BbsPwcheck.aspx?mode=r_mod&r_no=<%# Eval("r_no") %>&r_member=<%# Eval("r_member") %>">
                                         <%# Eval("r_wname").ToString() !="" ? "수정" : "" %></a>&nbsp;
-                                    <a href="/Bbs/BbsPwcheck.aspx?mode=r_del&r_no=<%# Eval("r_no") %>">
+                                    <a href="/Bbs/BbsPwcheck.aspx?mode=r_del&r_no=<%# Eval("r_no") %>&r_member=<%# Eval("r_member") %>">
                                         <%# Eval("r_wname").ToString() !="" ? "삭제" : "" %></a>&nbsp;
-                                    <a href="/Bbs/BbsReply.aspx?mode=r_re&r_no=<%# Eval("r_no") %>">
+                                    <a href="/Bbs/BbsReply.aspx?mode=r_re&r_no=<%# Eval("r_no") %>" onclick="open(this.href, 'reply', 'width = 450, height = 300'); return false;">
                                         <%# Eval("r_wname").ToString() !="" ? "답글" : "" %></a>&nbsp;
                                 </td>
                             </tr>
@@ -59,6 +59,7 @@
             <div class="reply-write-wrap">
                 <div class="reply-writer">
                     <asp:TextBox ID="r_wname" runat="server" placeholder="작성자" MaxLength="10" CssClass="form-control"></asp:TextBox>
+                    <asp:Label ID="lblText" runat="server" Visible="false">댓글 내용을 입력해주세요</asp:Label>
                 </div>                
                 <div class="reply-pw">
                     <asp:TextBox ID="r_pw" runat="server" TextMode="Password" placeholder="비밀번호" MaxLength="10" CssClass="form-control"></asp:TextBox>

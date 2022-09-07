@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace WebApplication1
@@ -178,15 +173,11 @@ namespace WebApplication1
 
                         if (cnt != 0)
                         {
-                            DialogResult dr = MessageBox.Show("회원 가입 성공\n확인을 누르면 홈으로 이동합니다.", "", MessageBoxButtons.OK);
-                            if (dr == DialogResult.OK)
-                            {
-                                Response.Redirect("/Main.aspx");
-                            }
+                            Response.Write("<script> alert('회원 가입 성공'); location.href='/Main.aspx'; </script>");
                         }
                         else
                         {
-                            MessageBox.Show("회원 가입 실패");
+                            Response.Write("<script> alert('회원 가입 실패'); </script>");
                         }
                     }
                     catch (Exception error)
@@ -264,8 +255,24 @@ namespace WebApplication1
 
                     cmd.Parameters.AddWithValue("@m_id", mb_id.Text);
 
+                    SqlCommand pcmd = new SqlCommand();
+                    SqlCommand rcmd = new SqlCommand();
+
+
                     if (mb_pw.Text != "")
+                    {//신규 비밀번호를 입력했다면
                         cmd.Parameters.AddWithValue("@m_pw", mb_pw.Text);
+                        
+                        pcmd.CommandText = "UPDATE bbs_post SET p_pw=@p_pw WHERE p_member='Y' AND p_wname=@p_wname";
+                        pcmd.Parameters.AddWithValue("@p_pw", mb_pw.Text);
+                        pcmd.Parameters.AddWithValue("@p_wname", Session["s_m_id"]);
+                        pcmd.Connection = conn;
+
+                        rcmd.CommandText = "UPDATE bbs_reply SET r_pw=@r_pw WHERE r_member='Y' AND r_wname=@r_wname";
+                        rcmd.Parameters.AddWithValue("@r_pw", mb_pw.Text);
+                        rcmd.Parameters.AddWithValue("@r_wname", Session["s_m_id"]);
+                        rcmd.Connection = conn;
+                    }                        
                     else
                         cmd.Parameters.AddWithValue("@m_pw", Session["s_m_pw"]);
 
@@ -281,15 +288,24 @@ namespace WebApplication1
 
                         if (cnt != 0)
                         {
-                            DialogResult dr = MessageBox.Show("회원정보수정 성공\n확인을 누르면 마이페이지로 이동합니다.", "", MessageBoxButtons.OK);
-                            if (dr == DialogResult.OK)
-                            {
-                                Response.Redirect("/Member/MemMypage.aspx");
-                            }
+                            if (mb_pw.Text != "")
+                                Session["s_m_pw"] = mb_pw.Text; //비밀번호를 수정했다면 세션비밀번호도 변경
+
+                            pcmd.ExecuteNonQuery();
+                            rcmd.ExecuteNonQuery();
+
+                            Response.Write("<script>alert('회원정보수정 성공'); location.href='/Member/MemMypage.aspx'; </script>");
+                            //Response.Redirect("/Member/MemMypage.aspx");
+                            //DialogResult dr = MessageBox.Show("회원정보수정 성공\n확인을 누르면 마이페이지로 이동합니다.", "", MessageBoxButtons.OK);
+                            //if (dr == DialogResult.OK)
+                            //{
+                            //    Response.Redirect("/Member/MemMypage.aspx");
+                            //}
                         }
                         else
                         {
-                            MessageBox.Show("수정 실패");
+                            Response.Write("<script>alert('회원정보수정 실패');</script>");
+
                         }
                     }
                     catch (Exception error)

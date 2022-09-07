@@ -2,13 +2,22 @@
     return new URLSearchParams(location.search).get(key);
 };
 
+//SQL Injection 주의 문자 : < > ( ) ' " ; = + | & - # ..
+const spExp = /[~!@$%^*_?:]/;
+const numExp = /[0-9]/;
+const engExp = /[a-zA-Z]/;
+const engUpExp = /[A-Z]/;
+const engLowExp = /[a-z]/;
+const korExp = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+const korComExp = /[가-힣]/;
+
 function bbsWriteCheck() {
 
-    var pNamelen = $("#MainContent_p_wname").val().length;
-    var pPwlen = $("#MainContent_p_pw").val().length;
-    var pSublen = $("#MainContent_p_subject").val().length;
-    var pContlen = $("#MainContent_p_content").val().length;
-    var loginStatus = $("#MainContent_loginStatus").val();
+    let pNamelen = $("#MainContent_p_wname").val().length;
+    let pPwlen = $("#MainContent_p_pw").val().length;
+    let pSublen = $("#MainContent_p_subject").val().length;
+    let pContlen = $("#MainContent_p_content").val().length;
+    let loginStatus = $("#MainContent_loginStatus").val();
     //alert(pSublen);
 
     if (pNamelen < 2 || pNamelen > 10) {
@@ -50,10 +59,10 @@ function bbsWriteCheck() {
 
 
 function imgFileCheck() {
-    var filename = $("#MainContent_p_thumb").val();
-    var filesize = $("#MainContent_p_thumb")[0].files[0].size;
-    var maxsize = 3 * 1024 * 1024;
-    var thumbname = filename.slice(filename.lastIndexOf("\\") + 1);
+    let filename = $("#MainContent_p_thumb").val();
+    let filesize = $("#MainContent_p_thumb")[0].files[0].size;
+    let maxsize = 3 * 1024 * 1024;
+    let thumbname = filename.slice(filename.lastIndexOf("\\") + 1);
 
     //alert(filesize);
     //alert(filename);
