@@ -39,7 +39,7 @@ namespace WebApplication1
                 DataRow cat = dbConn.GetRow(selectCatString);
                 if (Request["c_no"] != null)
                 {
-                    backUrl = "/Bbs/BbsList.aspx?bbs_cat=" + cat["c_name"].ToString() + "&c_no =" + Request["c_no"];
+                    backUrl = "/Bbs/BbsList.aspx?bbs_cat=" + cat["c_name"].ToString() + "&c_no=" + Request["c_no"];
                     if (Request["nowPage"] != null)
                         backUrl += "&nowPage=" + Request["nowPage"];
                 }
@@ -190,7 +190,12 @@ namespace WebApplication1
         protected void BtnCheck_Click(object sender, EventArgs e)
         {
             string pw = GetPw();
-            if (pw == typed_pw.Text)
+            SecurityUtility su = new SecurityUtility();
+            string sha_p_pw = su.SHA256Result(typed_pw.Text);
+
+            StringComparer sc = StringComparer.OrdinalIgnoreCase;        
+
+            if (sc.Compare(pw, sha_p_pw) == 0)
             {
                 string strConn = dbConn.GetConnectionString();
                 using (SqlConnection conn = new SqlConnection(strConn))
@@ -214,7 +219,8 @@ namespace WebApplication1
                             DataRow row = dbConn.GetRow(selectString);
                             string fileName = row["p_thumb"].ToString();
 
-                            cmd.Parameters.AddWithValue("@p_pw", typed_pw.Text);
+                            string sha_pw = su.SHA256Result(typed_pw.Text);
+                            cmd.Parameters.AddWithValue("@p_pw", sha_pw);
                             cmd.Connection = conn;
 
                             cmd.CommandText = sql;
@@ -232,7 +238,9 @@ namespace WebApplication1
                     }
                     else if (Request["mode"] == "mod")
                     {
-                        Response.Redirect("/Bbs/BbsUpdate.aspx?p_no=" + Request["p_no"] + "&p_member=" + Request["p_member"]);
+                        //Response.Redirect("/Bbs/BbsUpdate.aspx?p_no=" + Request["p_no"] + "&p_member=" + Request["p_member"]);
+                        Response.Redirect("/Bbs/BbsWrite.aspx?p_no=" + Request["p_no"] + "&p_member=" + Request["p_member"] + "&mode=mod");
+
                     }
                     else if (Request["mode"] == "r_del")
                     {
@@ -240,18 +248,33 @@ namespace WebApplication1
 
                         if (dr == DialogResult.Yes)
                         {
-                            string selectString = "SELECT A.p_no, B.c_no  FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE A.r_no=" + Request["r_no"];
+                            string selectString = "SELECT A.p_no, A.r_no, A.r_grpno, A.r_grpord, B.c_no  FROM bbs_reply A JOIN bbs_post B ON A.p_no=B.p_no WHERE A.r_no=" + Request["r_no"];
                             DataRow row = dbConn.GetRow(selectString);
                             string p_no = row["p_no"].ToString();
+                            string r_no = row["r_no"].ToString();
                             string c_no = row["c_no"].ToString();
+                            string r_grpno = row["r_grpno"].ToString();
+                            string r_grpord = row["r_grpord"].ToString();
 
+                            string str = "SELECT MAX(r_grpord) AS maxnum FROM bbs_reply WHERE r_delete='N' AND r_grpno=" + r_grpno;
+                            DataRow rw = dbConn.GetRow(str);
+                            string maxnum = rw["maxnum"].ToString();
 
-                            sql += "UPDATE bbs_reply";
-                            sql += " SET r_content='삭제된 댓글입니다', r_wname='', r_regdt='' ";
-                            sql += " WHERE r_no=" + Request["r_no"];
-                            //sql += " AND r_pw=@r_pw";
-
-                            //cmd.Parameters.AddWithValue("@r_pw", typed_pw.Text);
+                            if (maxnum == r_grpord)
+                            {//자식 댓글이 없거나 자식 댓글이 모두 삭제된 댓글
+                                sql += "DELETE FROM bbs_reply";
+                                sql += " WHERE r_grpno=@r_grpno AND r_grpord>=@r_grpord";
+                                cmd.Parameters.AddWithValue("@r_grpno", r_grpno);
+                                cmd.Parameters.AddWithValue("@r_grpord", maxnum);
+                            }
+                            else
+                            {//자식 댓글이 있는 댓글
+                                sql += "UPDATE bbs_reply";
+                                sql += " SET r_content='', r_wname='', r_regdt='', r_delete='Y' ";
+                                sql += " WHERE r_no=@r_no";
+                                cmd.Parameters.AddWithValue("@r_no", r_no);
+                            }
+                                                       
                             cmd.Connection = conn;
 
                             cmd.CommandText = sql;

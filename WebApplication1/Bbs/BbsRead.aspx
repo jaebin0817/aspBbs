@@ -19,11 +19,12 @@
                 ·
                 <asp:Label runat="server" ID="lblDel"></asp:Label>                
                 ·
-                <a href="BbsWrite.aspx">글쓰기</a>
+                <a href="BbsWrite.aspx?mode=new">글쓰기</a>
             </div>
         </div>
         <div class="reply-wrap">
             <div class="reply-list-wrap">
+                <asp:HiddenField ID="hidPNO" runat="server" />
                 <table>
                 <asp:SqlDataSource runat="server" ID="dsrcProduct" ConnectionString="<%$ ConnectionStrings:BoardDB %>">
                 </asp:SqlDataSource>
@@ -34,20 +35,20 @@
                                     <%# ShowIndent((int)Eval("r_indent"))%>
                                     <%# ShowReplyIcon((int)Eval("r_indent"))%>
                                     <strong><%# Eval("r_wname") %></strong>&nbsp;&nbsp;
-                                    <span id="r_redgt_td"><%# Eval("r_regdt").ToString() !="1900-01-01 오전 12:00:00" ? Eval("r_regdt") : "" %>&nbsp;&nbsp;</span>
+                                    <span id="r_redgt_td"><%# Eval("r_delete").ToString() !="Y" ? Eval("r_regdt") : "" %>&nbsp;&nbsp;</span>
                                     <a href="/Bbs/BbsPwcheck.aspx?mode=r_mod&r_no=<%# Eval("r_no") %>&r_member=<%# Eval("r_member") %>">
-                                        <%# Eval("r_wname").ToString() !="" ? "수정" : "" %></a>&nbsp;
+                                        <%# Eval("r_delete").ToString() !="Y" ? "수정" : "" %></a>&nbsp;
                                     <a href="/Bbs/BbsPwcheck.aspx?mode=r_del&r_no=<%# Eval("r_no") %>&r_member=<%# Eval("r_member") %>">
-                                        <%# Eval("r_wname").ToString() !="" ? "삭제" : "" %></a>&nbsp;
+                                        <%# Eval("r_delete").ToString() !="Y" ? "삭제" : "" %></a>&nbsp;
                                     <a href="/Bbs/BbsReply.aspx?mode=r_re&r_no=<%# Eval("r_no") %>" onclick="open(this.href, 'reply', 'width = 450, height = 300'); return false;">
-                                        <%# Eval("r_wname").ToString() !="" ? "답글" : "" %></a>&nbsp;
+                                        <%# Eval("r_delete").ToString() !="Y" ? "답글" : "" %></a>&nbsp;
                                 </td>
                             </tr>
                             <tr>                                
                                 <td class="r_content_td" colspan="5">
                                     <%# ShowIndent((int)Eval("r_indent"))%>
                                     <%# ShowReplySpace((int)Eval("r_indent"))%>
-                                    <%# Eval("r_content") %>
+                                    <%# Eval("r_delete").ToString() !="Y" ? Eval("r_content") : "삭제된 댓글입니다" %>
                                 </td>
                             </tr>
                         
@@ -69,6 +70,7 @@
                 </div>
                 <div class="reply-btn">
                     <asp:Button ID="btnReply" runat="server" Text="댓글 작성" OnClientClick="return replyCheck()" OnClick="BtnReply_Click" CssClass="btnReply"/><br />
+                    <asp:HiddenField ID="hdSID" runat="server" Value="" />
                 </div>
             </div>
 

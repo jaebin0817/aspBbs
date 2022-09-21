@@ -13,6 +13,7 @@ namespace WebApplication1
         {
             
             Paging pg = new Paging();
+            //SecurityUtility su = new SecurityUtility("bbssec12");
 
             string nowPage = Request["nowPage"];
             if (nowPage == null) { nowPage = "1"; }
@@ -22,18 +23,20 @@ namespace WebApplication1
 
             //string selectCatString = "SELECT c_name FROM bbs_cat
 
+            //string enc_c_no = Request["c_no"];
+            //string c_no = null;
+            //if (enc_c_no != null) c_no = su.DesResult(DesType.Decrypt, enc_c_no);
 
             string bbs_cat = Request["bbs_cat"];
             string c_no = Request["c_no"];
             string keyword = Request["keyword"];
 
-            string writeLink = "BbsWrite.aspx";
-        
+            string writeLink = "BbsWrite.aspx?mode=new";        
 
             if (bbs_cat != null)
             {
                 lblTitle.Text = bbs_cat + " 게시글 목록";
-                writeLink += "?bbs_cat=" + bbs_cat + "&c_no=" + c_no;
+                writeLink += "&bbs_cat=" + bbs_cat + "&c_no=" + c_no;
             }
             else if (keyword != null)
             {

@@ -13,6 +13,15 @@ namespace WebApplication1 {
     public partial class BbsWrite {
         
         /// <summary>
+        /// memStatus 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField memStatus;
+        
+        /// <summary>
         /// loginStatus 컨트롤입니다.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace WebApplication1 {
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField loginStatus;
+        
+        /// <summary>
+        /// lblTitle 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
         
         /// <summary>
         /// p_wname 컨트롤입니다.
@@ -121,6 +139,15 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.FileUpload p_thumb;
         
         /// <summary>
+        /// old_o_thumb 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label old_o_thumb;
+        
+        /// <summary>
         /// p_open_y 컨트롤입니다.
         /// </summary>
         /// <remarks>
@@ -157,12 +184,30 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
-        /// btnList 컨트롤입니다.
+        /// btnUpdate 컨트롤입니다.
         /// </summary>
         /// <remarks>
         /// 자동 생성 필드입니다.
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnList;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
+        
+        /// <summary>
+        /// btnRead 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRead;
+        
+        /// <summary>
+        /// btnHome 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHome;
     }
 }

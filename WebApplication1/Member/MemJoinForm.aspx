@@ -27,14 +27,14 @@
               <asp:HiddenField runat="server" ID="modeStatus"></asp:HiddenField>
 			  <th scope="row"><label id="pwlbl1" for="mb_pw" class="req">비밀번호</label></th>
 			  <td>
-                <asp:TextBox TextMode="Password" runat="server" name="mb_pw" id="mb_pw" required="required" CssClass="reg_input" MaxLength="30" placeholder="영문(대소문자 구분), 숫자, 8~30글자"></asp:TextBox>
+                <asp:TextBox TextMode="Password" runat="server" name="mb_pw" id="mb_pw" required="required" CssClass="reg_input" MaxLength="15" placeholder="영문(대소문자 구분), 숫자, 8~15글자"></asp:TextBox>
 			    <span id="msg_mb_pw" class="reg_msg"></span>
               </td>
 			</tr>
 			<tr>
 			  <th scope="row"><label id="pwlbl2" for="mb_pw_re" class="req">비밀번호 확인</label></th>
 			  <td>
-			    <input type="password" name="mb_pw_re" id="mb_pw_re" required class="reg_input" maxlength="30">
+			    <input type="password" name="mb_pw_re" id="mb_pw_re" required class="reg_input" maxlength="15">
 			    <span id="msg_mb_pw_re" class="reg_msg"></span>
 			  </td>
 			</tr>
@@ -178,11 +178,11 @@
         $("#MainContent_mb_pw").blur(function () {
 
             var mb_pw = $("#MainContent_mb_pw").val();
-            var pwRegExp = /^[a-zA-Z0-9]{8,30}$/;
+            var pwRegExp = /^[a-zA-Z0-9]{8,15}$/;
 
             if (!pwRegExp.test(mb_pw)) {
                 $("#msg_mb_pw").empty();
-                $("#msg_mb_pw").append("비밀번호는 영문 대소문자와 숫자 8~30자리로 입력해야합니다");
+                $("#msg_mb_pw").append("비밀번호는 영문 대소문자와 숫자 8~15자리로 입력해야합니다");
                 //$(this).focus();
             }
         });

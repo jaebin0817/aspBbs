@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.UI;
-
+using System.Text;
+using System.Net;
+using System.IO;
 
 namespace WebApplication1
 {
@@ -34,34 +36,43 @@ namespace WebApplication1
 
         protected void LinkCat1_Click(object sender, EventArgs e)
         {
-            Session["bbs_cat"] = "카테고리1";
-            Session["c_no"] = "1";
-            Session["keyword"] = null;
-            Session["nowPage"] = null;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("bbs_cat=카테고리1&c_no=1");
 
-            Response.Redirect("TestList.aspx");
+            Encoding encoding = Encoding.UTF8;
+            byte[] result = encoding.GetBytes(sb.ToString());
+
+            string url = "http://localhost:58253/TEST/TestList.aspx";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.ContentLength = result.Length;
+
+            Stream postDataStream = req.GetRequestStream();
+            postDataStream.Write(result, 0, result.Length);
+            postDataStream.Close();
+
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+
+            Stream respPostStream = resp.GetResponseStream();
+            StreamReader sr = new StreamReader(respPostStream, Encoding.Default);
+
+            string resultPost = sr.ReadToEnd();
+
+            Response.Redirect(resultPost);
 
         }
 
         protected void LinkCat2_Click(object sender, EventArgs e)
         {
-            Session["bbs_cat"] = "카테고리2";
-            Session["c_no"] = "2";
-            Session["keyword"] = null;
-            Session["nowPage"] = null;
 
-            Response.Redirect("TestList.aspx");
 
         }
 
         protected void LinkAll_Click(object sender, EventArgs e)
         {
-            Session["bbs_cat"] = null;
-            Session["c_no"] = null;
-            Session["keyword"] = null;
-            Session["nowPage"] = null;
 
-            Response.Redirect("TestList.aspx");
 
         }
 

@@ -13,6 +13,15 @@ namespace WebApplication1 {
     public partial class BbsWriteTest {
         
         /// <summary>
+        /// lblSec 컨트롤입니다.
+        /// </summary>
+        /// <remarks>
+        /// 자동 생성 필드입니다.
+        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSec;
+        
+        /// <summary>
         /// p_wname 컨트롤입니다.
         /// </summary>
         /// <remarks>
@@ -22,15 +31,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox p_wname;
         
         /// <summary>
-        /// rfvP_wname 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_wname;
-        
-        /// <summary>
         /// p_pw 컨트롤입니다.
         /// </summary>
         /// <remarks>
@@ -38,24 +38,6 @@ namespace WebApplication1 {
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox p_pw;
-        
-        /// <summary>
-        /// rfvP_pw 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_pw;
-        
-        /// <summary>
-        /// revP_pw 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revP_pw;
         
         /// <summary>
         /// c_no 컨트롤입니다.
@@ -76,15 +58,6 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox p_subject;
         
         /// <summary>
-        /// rfvP_subject 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_subject;
-        
-        /// <summary>
         /// p_content 컨트롤입니다.
         /// </summary>
         /// <remarks>
@@ -92,15 +65,6 @@ namespace WebApplication1 {
         /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox p_content;
-        
-        /// <summary>
-        /// rfvP_content 컨트롤입니다.
-        /// </summary>
-        /// <remarks>
-        /// 자동 생성 필드입니다.
-        /// 수정하려면 디자이너 파일에서 코드 숨김 파일로 필드 선언을 이동하세요.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvP_content;
         
         /// <summary>
         /// p_thumb 컨트롤입니다.

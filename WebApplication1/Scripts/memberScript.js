@@ -53,14 +53,14 @@ function JoinCheck() {
     //2)비밀번호 유효성
     let mb_pw = $("#MainContent_mb_pw").val();
     let mb_pw_re = $("#mb_pw_re").val();
-    let pwRegExp = /^[a-zA-Z0-9]{8,30}$/;
+    let pwRegExp = /^[a-zA-Z0-9]{8,15}$/;
     if (mb_pw.length == 0) {
         alert("비밀번호를 입력해주세요");
         $("#MainContent_mb_pw").focus();
         return false;
     } else {
         if (!pwRegExp.test(mb_pw)) {
-            alert("비밀번호는 영문 대소문자와 숫자 8~30자리로 입력해주세요");
+            alert("비밀번호는 영문 대소문자와 숫자 8~15자리로 입력해주세요");
             $("#MainContent_mb_pw").focus();
             return false;
         }
@@ -156,11 +156,11 @@ function UpdateCheck() {
     //비밀번호 유효성
     let mb_pw = $("#MainContent_mb_pw").val();
     let mb_pw_re = $("#mb_pw_re").val();
-    let pwRegExp = /^[a-zA-Z0-9]{8,30}$/;
+    let pwRegExp = /^[a-zA-Z0-9]{8,15}$/;
     if (mb_pw.length != 0) {
 
         if (!pwRegExp.test(mb_pw)) {
-            alert("비밀번호는 영문 대소문자와 숫자 8~30자리로 입력해주세요");
+            alert("비밀번호는 영문 대소문자와 숫자 8~15자리로 입력해주세요");
             $("#MainContent_mb_pw").focus();
             return false;
         }

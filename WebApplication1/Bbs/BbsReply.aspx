@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/Content/bootstrap-theme.css"/>
     <script src="/Scripts/memberScript.js"></script>
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/bbsReplyScript.js"></script>
 </head>
 <body>
 
@@ -32,9 +33,9 @@
                 </div>
             </div>
                 
-                <asp:Button ID="btnReply" runat="server" Text="답글 작성" OnClientClick="return replyCheck()" OnClick="BtnReply_Click" CssClass="btn-submit"/>
-                <asp:Button ID="btnReplyMod" runat="server" Text="댓글 수정" OnClientClick="return replyCheck()" OnClick="BtnReplyMod_Click" CssClass="btn-submit"/>                   
-
+                <asp:Button ID="btnReply" runat="server" Text="답글 작성" OnClientClick="return replyCheck2()" OnClick="BtnReply_Click" CssClass="btn-submit"/>
+                <asp:Button ID="btnReplyMod" runat="server" Text="댓글 수정" OnClientClick="return replyCheck2()" OnClick="BtnReplyMod_Click" CssClass="btn-submit"/>                   
+                <asp:HiddenField ID="hdSID" runat="server" Value="" />
           
         </div>
         <button type="button" onclick="window.close();" class="btn_close">창닫기</button>

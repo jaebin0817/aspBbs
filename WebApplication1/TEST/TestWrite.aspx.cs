@@ -31,66 +31,75 @@ namespace WebApplication1
 
                 conn.Open();
                 SqlCommand cmd = new SqlCommand();
-            
+                
                 cmd.Parameters.AddWithValue("@c_no", c_no.Text);
                 cmd.Parameters.AddWithValue("@p_subject", p_subject.Text);
                 cmd.Parameters.AddWithValue("@p_content", p_content.Text);
                 cmd.Parameters.AddWithValue("@p_wname", p_wname.Text);
                 cmd.Parameters.AddWithValue("@p_wip", GetIP());
-                cmd.Parameters.AddWithValue("@p_pw", p_pw.Text);
 
-                if (p_thumb.HasFile)
-                {
-                    string savePath = Server.MapPath("~/Uploads") + @"\";
-                    string fileName = p_thumb.FileName;
+                //비밀번호 암호화
+                SecurityUtility su = new SecurityUtility("bbssec12");
+                string enc_p_pw = su.DesResult(DesType.Encrypt, p_pw.Text);
+                string dec_p_pw = su.DesResult(DesType.Decrypt, enc_p_pw);
+                string sha_p_pw = su.SHA256Result(p_pw.Text);
 
-                    FileUpload fu = new FileUpload();
+                cmd.Parameters.AddWithValue("@p_pw", enc_p_pw);
 
-                    if (fu.ImageFileCheck(fileName))
-                    {
-                        fileName = fu.FileNameCheck(fileName, savePath);
+                lblSec.Text = "암호화:  " + enc_p_pw + " (" + enc_p_pw.Length + ")<br/>복호화: " + dec_p_pw + "<br/> SHA256: " + sha_p_pw + " (" + sha_p_pw.Length + ")";
 
-                        p_thumb.SaveAs(savePath + fileName);
+                //if (p_thumb.HasFile)
+                //{
+                //    string savePath = Server.MapPath("~/Uploads") + @"\";
+                //    string fileName = p_thumb.FileName;
 
-                        cmd.Parameters.AddWithValue("@p_thumb", fileName);
-                    }
-                    else
-                    {
-                        Response.Redirect("~/BbsMsg.aspx?mode=fileTypeError");
-                    }
+                //    FileUpload fu = new FileUpload();
+
+                //    if (fu.ImageFileCheck(fileName))
+                //    {
+                //        fileName = fu.FileNameCheck(fileName, savePath);
+
+                //        p_thumb.SaveAs(savePath + fileName);
+
+                //        cmd.Parameters.AddWithValue("@p_thumb", fileName);
+                //    }
+                //    else
+                //    {
+                //        Response.Redirect("~/BbsMsg.aspx?mode=fileTypeError");
+                //    }
 
 
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@p_thumb", "noimg.png");
-                }
+                //}
+                //else
+                //{
+                //    cmd.Parameters.AddWithValue("@p_thumb", "noimg.png");
+                //}
 
-                string p_open = "";
-                if (p_open_y.Checked == true)
-                    p_open = "Y";
-                else if (p_open_n.Checked == true)
-                    p_open = "N";
+                //string p_open = "";
+                //if (p_open_y.Checked == true)
+                //    p_open = "Y";
+                //else if (p_open_n.Checked == true)
+                //    p_open = "N";
 
-                cmd.Parameters.AddWithValue("@p_open", p_open);
+                //cmd.Parameters.AddWithValue("@p_open", p_open);
 
-                cmd.Connection = conn;
+                //cmd.Connection = conn;
 
-                try
-                {
-                    cmd.CommandText = insertString;
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception error)
-                {
-                    Response.Write(error.ToString());
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                //try
+                //{
+                //    cmd.CommandText = insertString;
+                //    cmd.ExecuteNonQuery();
+                //}
+                //catch (Exception error)
+                //{
+                //    Response.Write(error.ToString());
+                //}
+                //finally
+                //{
+                //    conn.Close();
+                //}
 
-                Response.Redirect("~/BbsList.aspx");
+                //Response.Redirect("~/BbsList.aspx");
 
             }
         }

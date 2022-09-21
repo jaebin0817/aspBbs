@@ -58,14 +58,10 @@
                   </td>
               </tr>
               <tr>
-                  <th rowspan="2">썸네일 이미지</th>
+                  <th>썸네일 이미지</th>
                   <td>
                       <asp:FileUpload id="p_thumb" runat="server" CssClass="form-control"></asp:FileUpload>
                       <h6>이미지 파일(.jpg, .jpeg, .png, .gif)만 업로드 가능합니다</h6>
-                  </td>
-              </tr>
-              <tr>
-                  <td>                      
                       <asp:Label ID="old_o_thumb" runat="server"></asp:Label>
                   </td>
               </tr>

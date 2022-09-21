@@ -8,6 +8,7 @@ namespace WebApplication1
     {
 
         DBConn dbConn = new DBConn();
+        SecurityUtility su = new SecurityUtility();
 
         protected string r_member = "";
         protected string p_member = "";
@@ -16,6 +17,9 @@ namespace WebApplication1
         {
             r_member = Request["r_member"];
             p_member = Request["p_member"];
+
+            if (Session["s_m_id"] != null)
+                hdSID.Value = Session["s_m_id"].ToString();
 
             if (Request["mode"] == "r_re")
             {
@@ -92,8 +96,11 @@ namespace WebApplication1
                 else
                 {
                     cmd.Parameters.AddWithValue("@r_wname", r_wname.Text);
-                    cmd.Parameters.AddWithValue("@r_pw", r_pw.Text);
                     cmd.Parameters.AddWithValue("@r_member", "N");
+
+                    string sha_r_pw = su.SHA256Result(r_pw.Text);   //비밀번호 암호화
+                    cmd.Parameters.AddWithValue("@r_pw", sha_r_pw);
+
                 }
 
                 cmd.Parameters.AddWithValue("@r_wip", dbConn.GetIP());
@@ -154,7 +161,8 @@ namespace WebApplication1
                 else if(r_member=="N")
                 {
                     cmd.Parameters.AddWithValue("@r_wname", r_wname.Text);
-                    cmd.Parameters.AddWithValue("@r_pw", r_pw.Text);
+                    string sha_r_pw = su.SHA256Result(r_pw.Text);   //비밀번호 암호화
+                    cmd.Parameters.AddWithValue("@r_pw", sha_r_pw);
                 }
 
                 cmd.Connection = conn;

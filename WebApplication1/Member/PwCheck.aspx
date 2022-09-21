@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>회원 탈퇴</title>
+    <title>비밀번호 확인</title>
     <link rel="stylesheet" href="/Content/style.css"/>
     <link rel="stylesheet" href="/Content/bootstrap.css"/>
     <link rel="stylesheet" href="/Content/bootstrap-theme.css"/>

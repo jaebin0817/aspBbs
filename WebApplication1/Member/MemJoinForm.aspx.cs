@@ -7,6 +7,10 @@ namespace WebApplication1
 {
     public partial class MemJoinForm : System.Web.UI.Page
     {
+        SecurityUtility su = new SecurityUtility();
+        MemberDAO mb = new MemberDAO();
+        DBConn dbConn = new DBConn();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -91,8 +95,6 @@ namespace WebApplication1
 
         protected void BtnJoin_Click(object sender, EventArgs e)
         {
-            MemberDAO mb = new MemberDAO();
-            DBConn dbConn = new DBConn();
 
             string m_email = "";
             m_email += email1.Text.ToString() + "@" + email2.Text.ToString();
@@ -111,6 +113,9 @@ namespace WebApplication1
                 m_gender = "M";
             else if (m_gender_f.Checked == true)
                 m_gender = "F";
+
+            msg_mb_email.Text = "";
+            msg_mb_hp.Text = "";
 
             if (mb.EmailCheck(m_email) != null)
             {//이미 사용중인 이메일
@@ -160,7 +165,10 @@ namespace WebApplication1
                     conn.Open();
 
                     cmd.Parameters.AddWithValue("@m_id", mb_id.Text);
-                    cmd.Parameters.AddWithValue("@m_pw", mb_pw.Text);
+                    
+                    string sha_p_pw = su.SHA256Result(mb_pw.Text);
+                    cmd.Parameters.AddWithValue("@m_pw", sha_p_pw);
+
                     cmd.Parameters.AddWithValue("@m_name", mb_name.Text);
                     cmd.Parameters.AddWithValue("@m_email", m_email);
 
@@ -195,8 +203,7 @@ namespace WebApplication1
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
-            MemberDAO mb = new MemberDAO();
-            DBConn dbConn = new DBConn();
+
 
             string m_email = "";
             m_email += email1.Text.ToString() + "@" + email2.Text.ToString();
@@ -216,6 +223,8 @@ namespace WebApplication1
             else if (m_gender_f.Checked == true)
                 m_gender = "F";
 
+            msg_mb_email.Text = "";
+            msg_mb_hp.Text = "";
             if (mb.EmailCheck(m_email) != null && m_email != old_email.Value)
             {//이미 사용중인 이메일
                 msg_mb_email.Text = "이미 사용중인 이메일입니다";
@@ -258,18 +267,20 @@ namespace WebApplication1
                     SqlCommand pcmd = new SqlCommand();
                     SqlCommand rcmd = new SqlCommand();
 
+                    string sha_p_pw = "";
 
                     if (mb_pw.Text != "")
                     {//신규 비밀번호를 입력했다면
-                        cmd.Parameters.AddWithValue("@m_pw", mb_pw.Text);
-                        
-                        pcmd.CommandText = "UPDATE bbs_post SET p_pw=@p_pw WHERE p_member='Y' AND p_wname=@p_wname";
-                        pcmd.Parameters.AddWithValue("@p_pw", mb_pw.Text);
+                        sha_p_pw = su.SHA256Result(mb_pw.Text);
+                        cmd.Parameters.AddWithValue("@m_pw", sha_p_pw);
+
+                        pcmd.CommandText = "UPDATE bbs_post SET p_pw=@p_pw WHERE p_member='Y' AND p_wname=@p_wname";                        
+                        pcmd.Parameters.AddWithValue("@p_pw", sha_p_pw);
                         pcmd.Parameters.AddWithValue("@p_wname", Session["s_m_id"]);
                         pcmd.Connection = conn;
 
                         rcmd.CommandText = "UPDATE bbs_reply SET r_pw=@r_pw WHERE r_member='Y' AND r_wname=@r_wname";
-                        rcmd.Parameters.AddWithValue("@r_pw", mb_pw.Text);
+                        rcmd.Parameters.AddWithValue("@r_pw", sha_p_pw);
                         rcmd.Parameters.AddWithValue("@r_wname", Session["s_m_id"]);
                         rcmd.Connection = conn;
                     }                        
@@ -289,7 +300,7 @@ namespace WebApplication1
                         if (cnt != 0)
                         {
                             if (mb_pw.Text != "")
-                                Session["s_m_pw"] = mb_pw.Text; //비밀번호를 수정했다면 세션비밀번호도 변경
+                                Session["s_m_pw"] = sha_p_pw; //비밀번호를 수정했다면 세션비밀번호도 변경
 
                             pcmd.ExecuteNonQuery();
                             rcmd.ExecuteNonQuery();

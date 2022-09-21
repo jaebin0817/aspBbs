@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Configuration;
-using Dapper;
-using System.Data;
-using System.Windows.Forms;
-using System.Web.UI;
+using System.Net;
+using System.IO;
 
 namespace WebApplication1
 {
@@ -15,8 +9,6 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            Session["p_no"] = null;
 
             Paging pg = new Paging();
 

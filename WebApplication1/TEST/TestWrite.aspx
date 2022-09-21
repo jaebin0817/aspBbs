@@ -7,24 +7,25 @@
 
       <table class="table write-form">
           <tr>
+              <th>암호화 패스워드</th>
+              <td>
+                  <asp:Label runat="server" ID="lblSec"></asp:Label>
+              </td>
+          </tr>
+
+          <tr>
               <th>작성자</th>
               <td>
                   <asp:TextBox id="p_wname" runat="server" MaxLength="20" CssClass="form-control"></asp:TextBox>
-                  <asp:RequiredFieldValidator ID="rfvP_wname" runat="server" ErrorMessage="작성자를 입력해주세요" 
+<%--                  <asp:RequiredFieldValidator ID="rfvP_wname" runat="server" ErrorMessage="작성자를 입력해주세요" 
                       Display="Dynamic" ControlToValidate="p_wname" SetFocusOnError="true">
-                  </asp:RequiredFieldValidator>
+                  </asp:RequiredFieldValidator>--%>
               </td>
           </tr>
           <tr>
               <th>비밀번호</th>
               <td>
-                  <asp:TextBox id="p_pw" runat="server" TextMode="Password" MaxLength="10" CssClass="form-control"></asp:TextBox>
-                  <asp:RequiredFieldValidator ID="rfvP_pw" runat="server" ErrorMessage="비밀번호를 입력해주세요" 
-                      Display="Dynamic" ControlToValidate="p_pw" SetFocusOnError="true">
-                  </asp:RequiredFieldValidator>
-                  <asp:RegularExpressionValidator ID="revP_pw" runat="server" ErrorMessage="비밀번호는 4자 이상 10자 이하여야 합니다"
-                      Display="Dynamic" ControlToValidate="p_pw" SetFocusOnError="true" ValidationExpression="\w{4,10}">
-                  </asp:RegularExpressionValidator>
+                  <asp:TextBox id="p_pw" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
               </td>
           </tr>
           <tr>
@@ -42,18 +43,18 @@
               <th>제목</th>
               <td>
                   <asp:TextBox id="p_subject" runat="server" MaxLength="100" CssClass="form-control"></asp:TextBox>
-                  <asp:RequiredFieldValidator ID="rfvP_subject" runat="server" ErrorMessage="제목을 입력해주세요" 
+<%--                  <asp:RequiredFieldValidator ID="rfvP_subject" runat="server" ErrorMessage="제목을 입력해주세요" 
                       Display="Dynamic" ControlToValidate="p_subject" SetFocusOnError="true">
-                  </asp:RequiredFieldValidator>
+                  </asp:RequiredFieldValidator>--%>
               </td>
           </tr>
           <tr>
               <th>내용</th>
               <td>
                   <asp:TextBox id="p_content" runat="server" TextMode="MultiLine" Height="400px" CssClass="form-control"></asp:TextBox>
-                   <asp:RequiredFieldValidator ID="rfvP_content" runat="server" ErrorMessage="내용을 입력해주세요" 
+<%--                   <asp:RequiredFieldValidator ID="rfvP_content" runat="server" ErrorMessage="내용을 입력해주세요" 
                       Display="Dynamic" ControlToValidate="p_content">
-                  </asp:RequiredFieldValidator>
+                  </asp:RequiredFieldValidator>--%>
               </td>
           </tr>
           <tr>

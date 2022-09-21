@@ -18,18 +18,19 @@ namespace WebApplication1.Member
 
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
-            string t_m_id = m_id.Text.ToString();
-            string t_m_pw = m_pw.Text.ToString();
-
+            SecurityUtility su = new SecurityUtility();
             MemberDAO mb = new MemberDAO();
 
-            string m_level = mb.LoginCheck(t_m_id, t_m_pw);
+            string t_m_id = m_id.Text.ToString();
+            string sha_p_pw = su.SHA256Result(m_pw.Text);           
+
+            string m_level = mb.LoginCheck(t_m_id, sha_p_pw);
 
             if (m_level != "")
             {//로그인 성공
 
                 Session["s_m_id"] = t_m_id;
-                Session["s_m_pw"] = t_m_pw;
+                Session["s_m_pw"] = sha_p_pw;
                 Session["s_m_level"] = m_level;
 
                 Response.Redirect("/Member/MemMypage.aspx");

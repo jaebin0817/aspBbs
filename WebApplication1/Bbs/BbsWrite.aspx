@@ -2,8 +2,9 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <div class="wrap">
+        <asp:HiddenField runat="server" ID="memStatus" />
         <asp:HiddenField runat="server" ID="loginStatus" />
-        <div class="page-title" id="page-title">게시글 작성</div>
+        <div class="page-title" id="page-title"><asp:Label runat="server" ID="lblTitle"></asp:Label></div>
           <table class="table write-form">
               <tr id="NonMember1">
                   <th>작성자</th>
@@ -61,6 +62,7 @@
                   <td>
                       <asp:FileUpload id="p_thumb" runat="server" CssClass="form-control" ></asp:FileUpload>
                       <h6>이미지 파일(.jpg, .jpeg, .png, .gif)만 업로드 가능합니다</h6>
+                      <asp:Label ID="old_o_thumb" runat="server" Visible="false"></asp:Label>
                   </td>
               </tr>
               <tr>
@@ -75,7 +77,9 @@
                    <th class="tb-btns">
                        <asp:Button id="btnWrite" runat="server" OnClientClick="return bbsWriteCheck()" OnClick="BtnWrite_Click" Text="쓰기"/>
                        <asp:Button id="btnCancel" runat="server" OnClick="BtnCancel_Click" Text="취소"/>
-                       <asp:Button id="btnList" runat="server" Text="HOME" PostBackUrl="~/Main.aspx" CausesValidation="false" />  
+                       <asp:Button id="btnUpdate" runat="server"  OnClientClick="return bbsWriteCheck()" OnClick="BtnUpdate_Click" Text="수정"/>
+                       <asp:Button id="btnRead" runat="server" Text="글보기" CausesValidation="false" />  
+                       <asp:Button id="btnHome" runat="server" Text="HOME" PostBackUrl="~/Main.aspx" CausesValidation="false" />  
                    </th>
               </tr>
           </table>
@@ -86,7 +90,8 @@
 
         $(document).ready(function () {
             var loginStatus = $("#MainContent_loginStatus").val();
-            if (loginStatus == "Y") {
+            var memStatus = $("#MainContent_memStatus").val();
+            if (loginStatus == "Y" && memStatus != "N") {
                 $("#NonMember1").css("display", "none");
                 $("#NonMember2").css("display", "none");
             }

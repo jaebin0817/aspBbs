@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Windows.Forms;
 
 namespace WebApplication1
@@ -11,7 +12,16 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            string referrer = Request.Headers["Referer"];
+
+            if(referrer== "http://localhost:58253/Main")
+            {
+                btnLeft.Visible = false;
+                btnList.Visible = false;
+                btnRight.Visible = false;
+                //btnHome.Visible = true;
+            }
+
             //카테고리명 조회
             string selectCatString = "SELECT c_name FROM bbs_cat A JOIN bbs_post B ON A.c_no=B.c_no WHERE p_no=";
             selectCatString += Request["p_no"];
@@ -24,8 +34,9 @@ namespace WebApplication1
             {
                 lblP_cat.Text = cat["c_name"].ToString();
             }
-                
-            
+
+            if (Session["s_m_id"] != null)
+                hdSID.Value = Session["s_m_id"].ToString();
 
             String backUrl = "~/Bbs/BbsList.aspx?";
 
@@ -35,7 +46,7 @@ namespace WebApplication1
             }
             else if(Request["keyword"] != null)
             {
-                btnList.PostBackUrl = "keyword=" + Request["keyword"];
+                backUrl += "keyword=" + Request["keyword"];
             }
 
             if (Request["nowPage"] != null)
@@ -100,26 +111,98 @@ namespace WebApplication1
 
         protected void BtnLeft_Click(object sender, EventArgs e)
         {
-            string prePostSelect = "SELECT MAX(p_no) AS p_no FROM bbs_post WHERE p_no<" + Request["p_no"] + " AND c_no=" + Request["c_no"];
-            DataTable preDt = dbConn.GetData(prePostSelect);
-            DataRow row = preDt.Rows[0];
+            StringBuilder prePostSelect = new StringBuilder();
 
-            if(row["p_no"].ToString() == "") { MessageBox.Show("이전페이지가 없습니다"); }
-            else { Response.Redirect("~/Bbs/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString()); }
+            prePostSelect.Append("SELECT * FROM bbs_post WHERE p_no=(");
+            prePostSelect.Append("SELECT MAX(p_no) FROM bbs_post WHERE p_open='Y' AND p_no<");
+            prePostSelect.Append(Request["p_no"]);
 
-            
+            string qs = "?";
+
+            if (Request["keyword"] == null && (Request["c_no"] != null))
+            {
+                prePostSelect.Append(" AND c_no=");
+                prePostSelect.Append(Request["c_no"]);
+                qs += "c_no=" + Request["c_no"] + "&";
+            }               
+            else if (Request["keyword"] != null)
+            {
+                string keyword = Request["keyword"];
+                keyword = keyword.Replace("'", "''");
+
+                SqlParameter parameter = new SqlParameter("@keyword", SqlDbType.VarChar);
+                parameter.Value = keyword;
+                prePostSelect.Append(" AND (p_subject LIKE '%" + @keyword + "%' OR p_wname LIKE '%" + @keyword + "%' OR p_content LIKE '%" + @keyword + "%')");
+
+                qs += "keyword=" + keyword + "&";
+            }
+            prePostSelect.Append(")");
+
+            string query = prePostSelect.ToString();
+            DataTable dt = dbConn.GetData(query);
+            int rCount = dt.Rows.Count;
+
+            if (dt == null || rCount == 0) { MessageBox.Show("이전 페이지가 없습니다"); }
+            else
+            {
+                DataRow row = dt.Rows[0];
+                if (row["p_no"].ToString() == "" || row["p_no"] == null) { MessageBox.Show("이전 페이지가 없습니다"); }
+                else
+                {
+                    qs += "p_no=" + row["p_no"].ToString();
+                    qs += "&p_member=" + row["p_member"].ToString();
+                    Response.Redirect("~/Bbs/BbsRead.aspx" + qs);
+                }
+            }
         }
 
 
         protected void BtnRight_Click(object sender, EventArgs e)
         {
-            string nextPostSelect = "SELECT MIN(p_no) AS p_no FROM bbs_post WHERE p_no>" + Request["p_no"] + " AND c_no=" + Request["c_no"];
-            DataTable nextDt = dbConn.GetData(nextPostSelect);
-            DataRow row = nextDt.Rows[0];
+            StringBuilder nextPostSelect = new StringBuilder();
 
-            if (row["p_no"].ToString() == "") { MessageBox.Show("다음 페이지가 없습니다"); }
-            else { Response.Redirect("~/Bbs/BbsRead.aspx?c_no=" + Request["c_no"] + "&p_no=" + row["p_no"].ToString()); }
+            nextPostSelect.Append("SELECT * FROM bbs_post WHERE p_no=(");
+            nextPostSelect.Append("SELECT MIN(p_no) FROM bbs_post WHERE p_open='Y' AND p_no>");
+            nextPostSelect.Append(Request["p_no"]);
 
+            string qs = "?";
+
+            if (Request["keyword"] == null && (Request["c_no"] != null))
+            {
+                nextPostSelect.Append(" AND c_no=");
+                nextPostSelect.Append(Request["c_no"]);
+                qs += "c_no=" + Request["c_no"] + "&";
+
+            }
+            else if (Request["keyword"] != null)
+            {
+                string keyword = Request["keyword"];
+                keyword = keyword.Replace("'", "''");
+
+                SqlParameter parameter = new SqlParameter("@keyword", SqlDbType.VarChar);
+                parameter.Value = keyword;
+                nextPostSelect.Append(" AND (p_subject LIKE '%" + @keyword + "%' OR p_wname LIKE '%" + @keyword + "%' OR p_content LIKE '%" + @keyword + "%')");
+
+                qs += "keyword=" + keyword + "&";
+            }
+            nextPostSelect.Append(")");
+
+            string query = nextPostSelect.ToString();
+            DataTable dt = dbConn.GetData(query);
+            int rCount = dt.Rows.Count;
+
+            if (dt == null || rCount == 0) { MessageBox.Show("다음 페이지가 없습니다"); }
+            else
+            {
+                DataRow row = dt.Rows[0];
+                if (row["p_no"].ToString() == "" || row["p_no"] == null) { MessageBox.Show("다음 페이지가 없습니다"); }
+                else
+                {
+                    qs += "p_no=" + row["p_no"].ToString();
+                    qs += "&p_member=" + row["p_member"].ToString();
+                    Response.Redirect("~/Bbs/BbsRead.aspx" + qs);
+                }
+            }
         }
 
 
@@ -147,9 +230,12 @@ namespace WebApplication1
                 }
                 else
                 {
-                    cmd.Parameters.AddWithValue("@r_wname", r_wname.Text);
-                    cmd.Parameters.AddWithValue("@r_pw", r_pw.Text);
+                    cmd.Parameters.AddWithValue("@r_wname", r_wname.Text);                   
                     cmd.Parameters.AddWithValue("@r_member", "N");
+
+                    SecurityUtility su = new SecurityUtility();     //비밀번호 암호화
+                    string sha_r_pw = su.SHA256Result(r_pw.Text);   
+                    cmd.Parameters.AddWithValue("@r_pw", sha_r_pw);
                 }
  
                 cmd.Connection = conn;

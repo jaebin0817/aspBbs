@@ -44,9 +44,9 @@ function bbsWriteCheck() {
         return false;
     }
 
-    if (pContlen > 20000) {
-        alert("게시글 내용은 20000자 이하로 입력해주세요");
-        var cont = $("#MainContent_p_content").val().substring(0, 20000);
+    if (pContlen > 4500) {
+        alert("게시글 내용은 4500자 이하로 입력해주세요");
+        var cont = $("#MainContent_p_content").val().substring(0, 4500);
         $("#MainContent_p_content").val(cont);
         $("#MainContent_p_content").focus();
         return false;

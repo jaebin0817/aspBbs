@@ -126,7 +126,7 @@
     <Content Include="Bbs\BbsRead.aspx" />
     <Content Include="Bbs\BbsReply.aspx" />
     <Content Include="TEST\BbsReplyMod.aspx" />
-    <Content Include="Bbs\BbsUpdate.aspx" />
+    <Content Include="TEST\BbsUpdate.aspx" />
     <Content Include="Bbs\BbsWrite.aspx" />
     <Content Include="error\Error.aspx" />
     <Content Include="Member\IdCheck.aspx" />
@@ -252,6 +252,7 @@
     <Compile Include="Bbs\BbsReply.aspx.designer.cs">
       <DependentUpon>BbsReply.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SecurityUtility.cs" />
     <Compile Include="TEST\BbsReplyMod.aspx.cs">
       <DependentUpon>BbsReplyMod.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -259,11 +260,11 @@
     <Compile Include="TEST\BbsReplyMod.aspx.designer.cs">
       <DependentUpon>BbsReplyMod.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Bbs\BbsUpdate.aspx.cs">
+    <Compile Include="TEST\BbsUpdate.aspx.cs">
       <DependentUpon>BbsUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Bbs\BbsUpdate.aspx.designer.cs">
+    <Compile Include="TEST\BbsUpdate.aspx.designer.cs">
       <DependentUpon>BbsUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bbs\BbsWrite.aspx.cs">

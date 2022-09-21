@@ -12,6 +12,9 @@ namespace WebApplication1.Member
 {
     public partial class PwCheck : System.Web.UI.Page
     {
+        SecurityUtility su = new SecurityUtility();
+        MemberDAO mb = new MemberDAO();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["mode"] == "withdraw")
@@ -31,12 +34,12 @@ namespace WebApplication1.Member
 
         protected void BtnMUpdate_Click(object sender, EventArgs e)
         {
-            string m_pw = w_m_pw.Text.ToString();
-            string m_id = Session["s_m_id"].ToString();
 
-            MemberDAO mb = new MemberDAO();
 
-            string result = mb.LoginCheck(m_id, m_pw);
+            string sha_p_pw = su.SHA256Result(w_m_pw.Text);
+            string m_id = Session["s_m_id"].ToString();            
+
+            string result = mb.LoginCheck(m_id, sha_p_pw);
 
             if (result == "")
             {
@@ -51,12 +54,10 @@ namespace WebApplication1.Member
 
         protected void BtnConf_Click(object sender, EventArgs e)
         {
-            string m_pw = w_m_pw.Text.ToString();
+            string sha_p_pw = su.SHA256Result(w_m_pw.Text);
             string m_id = Session["s_m_id"].ToString();
 
-            MemberDAO mb = new MemberDAO();
-
-            string result = mb.LoginCheck(m_id, m_pw);
+            string result = mb.LoginCheck(m_id, sha_p_pw);
 
             if (result == "")
             {
@@ -80,7 +81,7 @@ namespace WebApplication1.Member
                         sql += " WHERE m_id=@m_id AND m_pw=@m_pw";
 
                         cmd.Parameters.AddWithValue("@m_id", m_id);
-                        cmd.Parameters.AddWithValue("@m_pw", m_pw);
+                        cmd.Parameters.AddWithValue("@m_pw", sha_p_pw);
 
                         cmd.Connection = conn;
                         cmd.CommandText = sql;

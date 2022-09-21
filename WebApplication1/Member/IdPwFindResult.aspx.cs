@@ -35,6 +35,8 @@ namespace WebApplication1.Member
                 int idx = rd.Next(0, ch.Length);
                 tmpPw += ch[idx];
             }
+            SecurityUtility su = new SecurityUtility();
+            string encTmpPW = su.SHA256Result(tmpPw);
 
             DBConn dbConn = new DBConn();
             string strConn = dbConn.GetConnectionString();
@@ -49,8 +51,7 @@ namespace WebApplication1.Member
                 updateString += " WHERE m_id=@m_id";
 
                 cmd.Parameters.AddWithValue("@m_id", m_id);
-                cmd.Parameters.AddWithValue("@m_pw", tmpPw);
-
+                cmd.Parameters.AddWithValue("@m_pw", encTmpPW);
 
                 cmd.Connection = conn;
 
